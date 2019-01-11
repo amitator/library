@@ -46,4 +46,15 @@ public class Book {
     public int getAuthor_id() {
         return author_id;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(id);
+        sb.append("Book name: ").append(name);
+        sb.append("ISBN: ").append(isbn);
+        sb.append("Year: ").append(year);
+        sb.append("Type: ").append(type);
+        return sb.toString();
+    }
 }
