@@ -19,4 +19,31 @@ public class Book {
         this.author_id = author_id;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public int getPublisher_id() {
+        return publisher_id;
+    }
+
+    public int getAuthor_id() {
+        return author_id;
+    }
 }
