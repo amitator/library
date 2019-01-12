@@ -16,7 +16,7 @@ public interface BookDao {
 
     List<Book> getByType(String type);
 
-    Book getByAuthor(Author author);
+    List<Book> getByAuthor(Author author);
 
     Book getByPublisher(Publisher publisher);
 

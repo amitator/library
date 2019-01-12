@@ -49,9 +49,7 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public Book getByAuthor(Author author) {
-        return null;
-    }
+    public List<Book> getByAuthor(Author author) { return null; }
 
     @Override
     public Book getByPublisher(Publisher publisher) {

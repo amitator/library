@@ -50,4 +50,6 @@ public class BookCommands {
         Book book = new Book(id, name, isbn, year, type, publisher_id, author_id);
         dao.insert(book);
     }
+
+
 }
