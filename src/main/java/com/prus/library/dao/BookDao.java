@@ -12,9 +12,9 @@ public interface BookDao {
 
     Book getById(int id);
 
-    Book getByYear(int year);
+    List<Book> getByYear(int year);
 
-    Book getByType(String type);
+    List<Book> getByType(String type);
 
     Book getByAuthor(Author author);
 

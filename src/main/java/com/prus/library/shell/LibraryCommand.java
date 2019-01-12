@@ -24,4 +24,25 @@ public class LibraryCommand {
         }
     }
 
+    @ShellMethod("Get reccord by ID")
+    public void getById(int id){
+        System.out.println(dao.getById(id));
+    }
+
+    @ShellMethod("Get reccord by YEAR")
+    public void getByYear(int year){
+        List<Book> list = dao.getByYear(year);
+        for(Book book: list){
+            System.out.println(book);
+        }
+    }
+
+    @ShellMethod("Get reccord by TYPE")
+    public void getByType(String type){
+        List<Book> list = dao.getByType(type);
+        for(Book book: list){
+            System.out.println(book);
+        }
+    }
+
 }

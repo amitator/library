@@ -50,11 +50,11 @@ public class Book {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(id);
-        sb.append("Book name: ").append(name);
-        sb.append("ISBN: ").append(isbn);
-        sb.append("Year: ").append(year);
-        sb.append("Type: ").append(type);
+        sb.append("ID: ").append(id).append("\n");
+        sb.append("Book name: ").append(name).append("\n");
+        sb.append("ISBN: ").append(isbn).append("\n");
+        sb.append("Year: ").append(year).append("\n");
+        sb.append("Type: ").append(type).append("\n");
         return sb.toString();
     }
 }

@@ -39,13 +39,13 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public Book getByYear(int year) {
-        return jdbc.queryForObject("SELECT * FROM books WHERE year=?", new Object[] {year}, new BookMapper());
+    public List<Book> getByYear(int year) {
+        return jdbc.query("SELECT * FROM books WHERE year=?", new Object[] {year}, new BookMapper());
     }
 
     @Override
-    public Book getByType(String type) {
-        return jdbc.queryForObject("SELECT * FROM books WHERE type=?", new Object[] {type}, new BookMapper());
+    public List<Book> getByType(String type) {
+        return jdbc.query("SELECT * FROM books WHERE type=?", new Object[] {type}, new BookMapper());
     }
 
     @Override
@@ -60,7 +60,7 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public List<Book> getAll() {
-        return jdbc.queryForList("SELECT * FROM books", Book.class, new BookMapper());
+        return jdbc.query("SELECT * FROM books", new BookMapper());
     }
 
     private static class BookMapper implements RowMapper<Book>{
