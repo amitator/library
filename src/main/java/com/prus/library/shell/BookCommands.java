@@ -8,11 +8,11 @@ import org.springframework.shell.standard.ShellMethod;
 import java.util.List;
 
 @ShellComponent
-public class LibraryCommand {
+public class BookCommands {
 
     private BookDao dao;
 
-    public LibraryCommand(BookDao bookDao){
+    public BookCommands(BookDao bookDao){
         dao = bookDao;
     }
 

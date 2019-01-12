@@ -12,5 +12,7 @@ public interface AuthorDao {
 
     List<Author> getByLastName(String lastName);
 
-    List<Author> getAllAuthors();
+    void insert(Author author);
+
+    List<Author> getAll();
 }

@@ -22,4 +22,14 @@ public class Author {
     public String getLast_name() {
         return last_name;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(author_id).append("\n");
+        sb.append("First name: ").append(first_name).append("\n");
+        sb.append("Last name: ").append(last_name).append("\n");
+
+        return sb.toString();
+    }
 }
