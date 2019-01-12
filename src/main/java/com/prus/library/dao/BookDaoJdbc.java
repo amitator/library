@@ -65,7 +65,6 @@ public class BookDaoJdbc implements BookDao {
 
     private static class BookMapper implements RowMapper<Book>{
 
-        @Nullable
         @Override
         public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
             int id = rs.getInt("id");
