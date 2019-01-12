@@ -40,7 +40,7 @@ public class AuthorDaoJdbc implements AuthorDao {
 
     @Override
     public void insert(Author author) {
-        jdbc.update("INSERT INTO AUTHORS (ID, FIRST_NAME, LAST_NAME) VALUES (?, ?, ?)",
+        jdbc.update("INSERT INTO AUTHORS (AUTHOR_ID, FIRST_NAME, LAST_NAME) VALUES (?, ?, ?)",
                 author.getAuthor_id(),
                 author.getFirst_name(),
                 author.getLast_name());
