@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PublisherDao {
 
-    Publisher getById(int id);
+    Publisher getById(long id);
 
     List<Publisher> getByName(String firstName);
 

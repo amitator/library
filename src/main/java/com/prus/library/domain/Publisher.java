@@ -1,18 +1,23 @@
 package com.prus.library.domain;
 
 public class Publisher {
-    private final int publisher_id;
+    private long publisherId;
     private final String name;
     private final String country;
 
-    public Publisher(int publisher_id, String name, String country){
-        this.publisher_id = publisher_id;
+    public Publisher(String name, String country){
         this.name = name;
         this.country = country;
     }
 
-    public int getPublisher_id() {
-        return publisher_id;
+    public Publisher(int publisherId, String name, String country){
+        this.publisherId = publisherId;
+        this.name = name;
+        this.country = country;
+    }
+
+    public long getPublisherId() {
+        return publisherId;
     }
 
     public String getName() {
@@ -26,7 +31,7 @@ public class Publisher {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(publisher_id).append("\n");
+        sb.append("ID: ").append(publisherId).append("\n");
         sb.append("Name: ").append(name).append("\n");
         sb.append("Country: ").append(country).append("\n");
 

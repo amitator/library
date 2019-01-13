@@ -5,7 +5,6 @@ import com.prus.library.domain.Book;
 import com.prus.library.domain.Publisher;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -29,12 +28,12 @@ public class BookDaoJdbc implements BookDao {
                 book.getIsbn(),
                 book.getYear(),
                 book.getType(),
-                book.getPublisher_id(),
-                book.getAuthor_id());
+                book.getPublisherId(),
+                book.getAuthorId());
     }
 
     @Override
-    public Book getById(int id) {
+    public Book getById(long id) {
         return jdbc.queryForObject("SELECT * FROM books WHERE id=?", new Object[] {id}, new BookMapper());
     }
 

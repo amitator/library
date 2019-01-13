@@ -1,25 +1,34 @@
 package com.prus.library.domain;
 
 public class Book {
-    private final int id;
+    private long id;
     private final String name;
     private final int isbn;
     private final int year;
     private final String type;
-    private final int publisher_id;
-    private final int author_id;
+    private final int publisherId;
+    private final int authorId;
 
-    public Book(int id, String name, int isbn, int year, String type, int publisher_id, int author_id){
+    public Book(String name, int isbn, int year, String type, int publisherId, int authorId){
+        this.name = name;
+        this.isbn = isbn;
+        this.year = year;
+        this.type = type;
+        this.publisherId = publisherId;
+        this.authorId = authorId;
+    }
+
+    public Book(int id, String name, int isbn, int year, String type, int publisherId, int authorId){
         this.id = id;
         this.name = name;
         this.isbn = isbn;
         this.year = year;
         this.type = type;
-        this.publisher_id = publisher_id;
-        this.author_id = author_id;
+        this.publisherId = publisherId;
+        this.authorId = authorId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -39,12 +48,12 @@ public class Book {
         return type;
     }
 
-    public int getPublisher_id() {
-        return publisher_id;
+    public int getPublisherId() {
+        return publisherId;
     }
 
-    public int getAuthor_id() {
-        return author_id;
+    public int getAuthorId() {
+        return authorId;
     }
 
     @Override

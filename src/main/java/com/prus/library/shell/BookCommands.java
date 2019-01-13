@@ -25,7 +25,7 @@ public class BookCommands {
     }
 
     @ShellMethod("Get book by ID")
-    public void getId(int id){
+    public void getId(long id){
         System.out.println(dao.getById(id));
     }
 
@@ -45,9 +45,9 @@ public class BookCommands {
         }
     }
 
-    @ShellMethod("Add book: ID NAME ISBN YEAR TYPE PUBLISHER_ID AUTHOR_ID")
-    public void add(int id, String name, int isbn, int year, String type, int publisher_id, int author_id){
-        Book book = new Book(id, name, isbn, year, type, publisher_id, author_id);
+    @ShellMethod("Add book: NAME ISBN YEAR TYPE PUBLISHER_ID AUTHOR_ID")
+    public void add(String name, int isbn, int year, String type, int publisher_id, int author_id){
+        Book book = new Book(name, isbn, year, type, publisher_id, author_id);
         dao.insert(book);
     }
 

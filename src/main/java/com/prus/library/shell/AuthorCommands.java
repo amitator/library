@@ -31,7 +31,7 @@ public class AuthorCommands {
     }
 
     @ShellMethod("Get author by ID")
-    public void getauId(int id){
+    public void getauId(long id){
         System.out.println(dao.getById(id));
     }
 

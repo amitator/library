@@ -16,9 +16,9 @@ public class PublisherCommands {
         this.dao = publisherDao;
     }
 
-    @ShellMethod("Add publisher: ID NAME COUNTRY")
-    public void addpub(int id, String name, String country){
-        Publisher publisher = new Publisher(id, name, country);
+    @ShellMethod("Add publisher: NAME COUNTRY")
+    public void addpub(String name, String country){
+        Publisher publisher = new Publisher(name, country);
         dao.insert(publisher);
     }
 
@@ -31,7 +31,7 @@ public class PublisherCommands {
     }
 
     @ShellMethod("Get publisher by ID")
-    public void getpubId(int id){
+    public void getpubId(long id){
         System.out.println(dao.getById(id));
     }
 

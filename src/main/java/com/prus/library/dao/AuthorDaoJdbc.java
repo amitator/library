@@ -24,7 +24,7 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public Author getById(int id) {
+    public Author getById(long id) {
         return jdbc.queryForObject("SELECT * FROM authors WHERE author_id=?", new Object[] {id}, new AuthorMapper());
     }
 
@@ -41,8 +41,8 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public void insert(Author author) {
         jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
-                author.getFirst_name(),
-                author.getLast_name());
+                author.getFirstName(),
+                author.getLastName());
     }
 
     private static class AuthorMapper implements RowMapper<Author> {

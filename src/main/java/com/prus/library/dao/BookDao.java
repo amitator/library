@@ -10,7 +10,7 @@ public interface BookDao {
 
     void insert(Book book);
 
-    Book getById(int id);
+    Book getById(long id);
 
     List<Book> getByYear(int year);
 

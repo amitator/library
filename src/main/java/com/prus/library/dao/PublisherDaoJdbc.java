@@ -24,7 +24,7 @@ public class PublisherDaoJdbc implements PublisherDao{
     }
 
     @Override
-    public Publisher getById(int id) {
+    public Publisher getById(long id) {
         return jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_id=?", new Object[] {id}, new PublisherMapper());
     }
 
@@ -41,7 +41,7 @@ public class PublisherDaoJdbc implements PublisherDao{
     @Override
     public void insert(Publisher publisher) {
         jdbc.update("INSERT INTO publishers (ID, NAME, COUNTRY) VALUES (?, ?, ?)",
-                publisher.getPublisher_id(),
+                publisher.getPublisherId(),
                 publisher.getName(),
                 publisher.getCountry());
     }
