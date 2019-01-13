@@ -29,7 +29,7 @@ public class PublisherDaoJdbcTest {
     public void getByIdTest(){
         Publisher publisher = dao.getById(1);
         assertThat(publisher.getPublisherId()).isEqualTo(1);
-        assertThat(publisher.getName()).isEqualTo("OREILLY");
+        assertThat(publisher.getPublisherId()).isEqualTo(1);
     }
 
     @Test

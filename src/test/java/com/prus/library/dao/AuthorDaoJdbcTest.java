@@ -28,7 +28,7 @@ public class AuthorDaoJdbcTest {
     public void getByIdTest(){
         Author author = dao.getById(1);
         assertThat(author.getAuthorId()).isEqualTo(1);
-        assertThat(author.getFirstName()).isEqualTo("JOSHUA");
+        assertThat(author.getAuthorId()).isEqualTo(1);
     }
 
     @Test
