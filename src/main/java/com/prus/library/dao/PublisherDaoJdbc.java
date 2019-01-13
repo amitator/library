@@ -40,8 +40,7 @@ public class PublisherDaoJdbc implements PublisherDao{
 
     @Override
     public void insert(Publisher publisher) {
-        jdbc.update("INSERT INTO publishers (ID, NAME, COUNTRY) VALUES (?, ?, ?)",
-                publisher.getPublisherId(),
+        jdbc.update("INSERT INTO publishers (NAME, COUNTRY) VALUES (?, ?)",
                 publisher.getName(),
                 publisher.getCountry());
     }
