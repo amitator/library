@@ -3,13 +3,13 @@ package com.prus.library.dao;
 import com.prus.library.domain.Publisher;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository
 public class PublisherDaoJdbc implements PublisherDao{
 
     private final JdbcOperations jdbc;
