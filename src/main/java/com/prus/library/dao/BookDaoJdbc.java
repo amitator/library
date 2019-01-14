@@ -33,7 +33,7 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public Book getById(long id) {
-        return jdbc.queryForObject("SELECT * FROM books WHERE id=?", new Object[] {id}, new BookMapper());
+        return jdbc.queryForObject("SELECT * FROM books  WHERE id=?", new Object[] {id}, new BookMapper());
     }
 
     @Override

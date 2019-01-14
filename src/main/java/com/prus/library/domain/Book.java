@@ -6,12 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class Book {
 
-    @Autowired
-    private AuthorDao authorDao;
-
-    @Autowired
-    private PublisherDao publisherDao;
-
     private long id;
     private final String name;
     private final int isbn;
@@ -72,9 +66,9 @@ public class Book {
 //        Author author = authorDao.getById(authorId);
 //        String authorFirstName = author.getFirstName();
 //        String authorLastName = author.getLastName();
-        System.out.println(publisherId);
+//        System.out.println(publisherId);
 //        Publisher publisher =
-                publisherDao.getById(publisherId);
+//                publisherDao.getById(publisherId);
 //        String publisherName = publisher.getName();
 
         StringBuilder sb = new StringBuilder();
