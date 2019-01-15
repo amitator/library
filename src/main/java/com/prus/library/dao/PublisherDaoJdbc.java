@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class PublisherDaoJdbc implements PublisherDao{
 
     private final JdbcOperations jdbc;
@@ -25,7 +26,8 @@ public class PublisherDaoJdbc implements PublisherDao{
 
     @Override
     public Publisher getById(long id) {
-        return jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_id=?", new Object[] {id}, new PublisherMapper());
+        Publisher publisher = jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_id=?", new Object[] {id}, new PublisherMapper());
+        return publisher;
     }
 
     @Override

@@ -10,6 +10,7 @@ public class Book {
     private final long publisherId;
     private final long authorId;
     private Author author;
+    private Publisher publisher;
 
     public Book(String name, int isbn, int year, String type, int publisherId, int authorId){
         this.name = name;
@@ -58,28 +59,24 @@ public class Book {
         return authorId;
     }
 
-    public void setAuthor(Author au){
-        this.author = au;
+    public void setAuthor(Author author){
+        this.author = author;
+    }
+
+    public void setPublisher(Publisher publisher){
+        this.publisher = publisher;
     }
 
     @Override
     public String toString(){
-//        Author author = authorDao.getById(authorId);
-//        String authorFirstName = author.getFirstName();
-//        String authorLastName = author.getLastName();
-//        System.out.println(publisherId);
-//        Publisher publisher =
-//                publisherDao.getById(publisherId);
-//        String publisherName = publisher.getName();
-
         StringBuilder sb = new StringBuilder();
         sb.append("ID: ").append(id).append("\n");
         sb.append("Book name: ").append(name).append("\n");
         sb.append("ISBN: ").append(isbn).append("\n");
         sb.append("Year: ").append(year).append("\n");
         sb.append("Type: ").append(type).append("\n");
-//        sb.append("Author: ").append(authorFirstName).append(" ").append(authorLastName);
-//        sb.append("Publisher: ").append(publisherName);
+        sb.append("Author: ").append(author.getFirstName()).append(" ").append(author.getLastName()).append("\n");
+        sb.append("Publisher: ").append(publisher.getName()).append("\n");
         return sb.toString();
     }
 }

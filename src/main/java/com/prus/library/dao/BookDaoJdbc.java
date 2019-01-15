@@ -18,9 +18,12 @@ public class BookDaoJdbc implements BookDao {
 
     private final AuthorDao authorDao;
 
-    public BookDaoJdbc(JdbcOperations jdbc, AuthorDao authorDao) {
+    private final PublisherDao publisherDao;
+
+    public BookDaoJdbc(JdbcOperations jdbc, AuthorDao authorDao, PublisherDao publisherDao) {
         this.jdbc = jdbc;
         this.authorDao = authorDao;
+        this.publisherDao = publisherDao;
     }
 
     @Override
@@ -37,20 +40,22 @@ public class BookDaoJdbc implements BookDao {
     @Override
     public Book getById(long id) {
         Book book = jdbc.queryForObject("SELECT * FROM books  WHERE id=?", new Object[] {id}, new BookMapper());
-        Author author = authorDao.getById(book.getAuthorId());
-        book.setAuthor(author);
-
-        return book;
+        getAuthor(book);
+        return getPublisher(book);
     }
 
     @Override
     public List<Book> getByYear(int year) {
-        return jdbc.query("SELECT * FROM books WHERE year=?", new Object[] {year}, new BookMapper());
+        List<Book> list = jdbc.query("SELECT * FROM books WHERE year=?", new Object[] {year}, new BookMapper());
+        getPublisherList(list);
+        return getAuthorsList(list);
     }
 
     @Override
     public List<Book> getByType(String type) {
-        return jdbc.query("SELECT * FROM books WHERE type=?", new Object[] {type}, new BookMapper());
+        List<Book> list = jdbc.query("SELECT * FROM books WHERE type=?", new Object[] {type}, new BookMapper());
+        getPublisherList(list);
+        return getAuthorsList(list);
     }
 
     @Override
@@ -63,7 +68,36 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public List<Book> getAll() {
-        return jdbc.query("SELECT * FROM books", new BookMapper());
+        List<Book> list = jdbc.query("SELECT * FROM books", new BookMapper());
+        list = getPublisherList(list);
+        return getAuthorsList(list);
+    }
+
+    private List<Book> getAuthorsList(List<Book> list){
+        for(Book b: list){
+            getAuthor(b);
+        }
+        return list;
+    }
+
+    private Book getAuthor(Book book){
+        Author author = authorDao.getById(book.getAuthorId());
+        book.setAuthor(author);
+        return book;
+    }
+
+    private Book getPublisher(Book book){
+        Publisher publisher = publisherDao.getById(book.getAuthorId());
+        book.setPublisher(publisher);
+        return book;
+    }
+
+    private List<Book> getPublisherList(List<Book> list){
+        for (Book b : list) {
+            Publisher publisher = publisherDao.getById(b.getPublisherId());
+            b.setPublisher(publisher);
+        }
+        return list;
     }
 
     private static class BookMapper implements RowMapper<Book>{
