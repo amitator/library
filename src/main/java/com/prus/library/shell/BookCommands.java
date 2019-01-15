@@ -45,6 +45,14 @@ public class BookCommands {
         }
     }
 
+    @ShellMethod("Get books by PUBLISHER")
+    public void getBookByPublisher(String name){
+        List<Book> list = dao.getByPublisher(name);
+        for(Book book: list){
+            System.out.println(book);
+        }
+    }
+
     @ShellMethod("Add book: NAME ISBN YEAR TYPE PUBLISHER_ID AUTHOR_ID")
     public void addBook(String name, int isbn, int year, String type, int publisher_id, int author_id){
         Book book = new Book(name, isbn, year, type, publisher_id, author_id);

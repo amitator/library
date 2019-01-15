@@ -8,7 +8,7 @@ public interface PublisherDao {
 
     Publisher getById(long id);
 
-    List<Publisher> getByName(String firstName);
+    Publisher getByName(String name);
 
     List<Publisher> getByCountry(String country);
 

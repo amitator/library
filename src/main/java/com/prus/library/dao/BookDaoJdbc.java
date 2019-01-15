@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -59,11 +60,21 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public List<Book> getByAuthor(Author author) { return null; }
+    public List<Book> getByAuthor(Author author) {
+        return null;
+    }
 
     @Override
-    public Book getByPublisher(Publisher publisher) {
-        return null;
+    public List<Book> getByPublisher(String name) {
+        Publisher publisher = publisherDao.getByName(name);
+        List<Book> result = new ArrayList<>();
+        List<Book> list = getAll();
+        for(Book b: list){
+            if(b.getPublisherId() == publisher.getPublisherId()){
+                result.add(b);
+            }
+        }
+        return result;
     }
 
     @Override

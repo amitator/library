@@ -34,9 +34,8 @@ public class PublisherDaoJdbcTest {
 
     @Test
     public void getByNameTest(){
-        List<Publisher> list = dao.getByName("MANNING");
-        assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getName()).isEqualTo("MANNING");
+        Publisher publisher = dao.getByName("MANNING");
+        assertThat(publisher.getName()).isEqualTo("MANNING");
     }
 
     @Test

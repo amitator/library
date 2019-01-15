@@ -26,13 +26,12 @@ public class PublisherDaoJdbc implements PublisherDao{
 
     @Override
     public Publisher getById(long id) {
-        Publisher publisher = jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_id=?", new Object[] {id}, new PublisherMapper());
-        return publisher;
+        return jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_id=?", new Object[] {id}, new PublisherMapper());
     }
 
     @Override
-    public List<Publisher> getByName(String name) {
-        return jdbc.query("SELECT * FROM publishers WHERE name=?", new Object[] {name}, new PublisherMapper());
+    public Publisher getByName(String name) {
+        return jdbc.queryForObject("SELECT * FROM publishers WHERE name=?", new Object[] {name}, new PublisherMapper());
     }
 
     @Override

@@ -35,15 +35,13 @@ public class PublisherCommands {
         System.out.println(dao.getById(id));
     }
 
-    @ShellMethod("Get authors by FIRST NAME")
+    @ShellMethod("Get publisher by NAME")
     public void getPublisherByName(String name){
-        List<Publisher> list = dao.getByName(name);
-        for(Publisher publisher: list){
-            System.out.println(publisher);
-        }
+        Publisher publisher = dao.getByName(name);
+        System.out.println(publisher);
     }
 
-    @ShellMethod("Get authors by COUNTRY")
+    @ShellMethod("Get publisher by COUNTRY")
     public void getPublisherByCountry(String country){
         List<Publisher> list = dao.getByCountry(country);
         for(Publisher publisher: list){
