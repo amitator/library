@@ -16,8 +16,11 @@ public class BookDaoJdbc implements BookDao {
 
     private final JdbcOperations jdbc;
 
-    public BookDaoJdbc(JdbcOperations jdbc) {
+    private final AuthorDao authorDao;
+
+    public BookDaoJdbc(JdbcOperations jdbc, AuthorDao authorDao) {
         this.jdbc = jdbc;
+        this.authorDao = authorDao;
     }
 
     @Override
@@ -33,7 +36,11 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public Book getById(long id) {
-        return jdbc.queryForObject("SELECT * FROM books  WHERE id=?", new Object[] {id}, new BookMapper());
+        Book book = jdbc.queryForObject("SELECT * FROM books  WHERE id=?", new Object[] {id}, new BookMapper());
+        Author author = authorDao.getById(book.getAuthorId());
+        book.setAuthor(author);
+
+        return book;
     }
 
     @Override

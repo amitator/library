@@ -1,9 +1,5 @@
 package com.prus.library.domain;
 
-import com.prus.library.dao.AuthorDao;
-import com.prus.library.dao.PublisherDao;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class Book {
 
     private long id;
@@ -13,6 +9,7 @@ public class Book {
     private final String type;
     private final long publisherId;
     private final long authorId;
+    private Author author;
 
     public Book(String name, int isbn, int year, String type, int publisherId, int authorId){
         this.name = name;
@@ -59,6 +56,10 @@ public class Book {
 
     public long getAuthorId() {
         return authorId;
+    }
+
+    public void setAuthor(Author au){
+        this.author = au;
     }
 
     @Override
