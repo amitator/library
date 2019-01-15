@@ -17,13 +17,13 @@ public class PublisherCommands {
     }
 
     @ShellMethod("Add publisher: NAME COUNTRY")
-    public void addpub(String name, String country){
+    public void addPublisher(String name, String country){
         Publisher publisher = new Publisher(name, country);
         dao.insert(publisher);
     }
 
     @ShellMethod("Get all publishers")
-    public void getpubAll(){
+    public void getAllPublishers(){
         List<Publisher> list = dao.getAll();
         for(Publisher publisher: list){
             System.out.println(publisher);
@@ -31,12 +31,12 @@ public class PublisherCommands {
     }
 
     @ShellMethod("Get publisher by ID")
-    public void getpubId(long id){
+    public void getPublisherById(long id){
         System.out.println(dao.getById(id));
     }
 
     @ShellMethod("Get authors by FIRST NAME")
-    public void getpubName(String name){
+    public void getPublisherByName(String name){
         List<Publisher> list = dao.getByName(name);
         for(Publisher publisher: list){
             System.out.println(publisher);
@@ -44,7 +44,7 @@ public class PublisherCommands {
     }
 
     @ShellMethod("Get authors by COUNTRY")
-    public void getpubCountry(String country){
+    public void getPublisherByCountry(String country){
         List<Publisher> list = dao.getByCountry(country);
         for(Publisher publisher: list){
             System.out.println(publisher);

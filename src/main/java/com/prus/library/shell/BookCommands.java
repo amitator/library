@@ -17,7 +17,7 @@ public class BookCommands {
     }
 
     @ShellMethod("Get all books")
-    public void getAll(){
+    public void getAllBooks(){
         List<Book> list = dao.getAll();
         for(Book book: list){
             System.out.println(book);
@@ -25,12 +25,12 @@ public class BookCommands {
     }
 
     @ShellMethod("Get book by ID")
-    public void getId(long id){
+    public void getBookById(long id){
         System.out.println(dao.getById(id));
     }
 
     @ShellMethod("Get books by YEAR")
-    public void getYear(int year){
+    public void getBookByYear(int year){
         List<Book> list = dao.getByYear(year);
         for(Book book: list){
             System.out.println(book);
@@ -38,7 +38,7 @@ public class BookCommands {
     }
 
     @ShellMethod("Get books by TYPE")
-    public void getType(String type){
+    public void getBookByType(String type){
         List<Book> list = dao.getByType(type);
         for(Book book: list){
             System.out.println(book);
@@ -46,7 +46,7 @@ public class BookCommands {
     }
 
     @ShellMethod("Add book: NAME ISBN YEAR TYPE PUBLISHER_ID AUTHOR_ID")
-    public void add(String name, int isbn, int year, String type, int publisher_id, int author_id){
+    public void addBook(String name, int isbn, int year, String type, int publisher_id, int author_id){
         Book book = new Book(name, isbn, year, type, publisher_id, author_id);
         dao.insert(book);
     }

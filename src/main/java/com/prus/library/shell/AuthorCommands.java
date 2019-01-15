@@ -17,13 +17,13 @@ public class AuthorCommands {
     }
 
     @ShellMethod("Add author: FIRST_NAME LAST_NAME")
-    public void addau(String first_name, String last_name){
+    public void addAuthor(String first_name, String last_name){
         Author author = new Author(first_name, last_name);
         dao.insert(author);
     }
 
     @ShellMethod("Get all authors")
-    public void getauAll(){
+    public void getAllAuthors(){
         List<Author> list = dao.getAll();
         for(Author author: list){
             System.out.println(author);
@@ -31,12 +31,12 @@ public class AuthorCommands {
     }
 
     @ShellMethod("Get author by ID")
-    public void getauId(long id){
+    public void getAuthorById(long id){
         System.out.println(dao.getById(id));
     }
 
     @ShellMethod("Get authors by FIRST NAME")
-    public void getauFirst(String firstName){
+    public void getAuthorsByFirstName(String firstName){
         List<Author> list = dao.getByFirstName(firstName);
         for(Author author: list){
             System.out.println(author);
@@ -44,7 +44,7 @@ public class AuthorCommands {
     }
 
     @ShellMethod("Get authors by LAST NAME")
-    public void getauLast(String lastName){
+    public void getAuthorsByLastName(String lastName){
         List<Author> list = dao.getByLastName(lastName);
         for(Author author: list){
             System.out.println(author);
