@@ -15,4 +15,6 @@ public interface PublisherDao {
     void insert(Publisher author);
 
     List<Publisher> getAll();
+
+    boolean existInDatabase(Publisher publisher);
 }

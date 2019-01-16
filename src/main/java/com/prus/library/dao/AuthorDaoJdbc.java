@@ -56,4 +56,9 @@ public class AuthorDaoJdbc implements AuthorDao {
             return new Author(id, firstName, lastName);
         }
     }
+
+    public boolean existInDatabase(Author author){
+        Author temp = jdbc.queryForObject("SELECT * FROM authors WHERE first_name=? AND last_name=?", new Object[] {author.getFirstName(), author.getLastName()}, new AuthorMapper());
+        return temp == null ? false : true;
+    }
 }

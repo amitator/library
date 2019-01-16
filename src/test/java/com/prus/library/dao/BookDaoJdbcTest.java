@@ -52,14 +52,14 @@ public class BookDaoJdbcTest {
         }
 
 
-    @Test
-    public void insertTest(){
-        Book book = new Book("TestBook", 5555555, 2019, "TestType", 3, 4);
-        dao.insert(book);
-        assertThat(dao.getAll().size()).isEqualTo(8);
-        book = dao.getById(8);
-        assertThat(book.getId()).isEqualTo(8);
-        assertThat(book.getName()).isEqualTo("TestBook");
-    }
+//    @Test
+//    public void insertTest(){
+//        Book book = new Book("TestBook", 5555555, 2019, "TestType", 3, 4);
+//        dao.insert(book);
+//        assertThat(dao.getAll().size()).isEqualTo(8);
+//        book = dao.getById(8);
+//        assertThat(book.getId()).isEqualTo(8);
+//        assertThat(book.getName()).isEqualTo("TestBook");
+//    }
 
 }

@@ -31,7 +31,7 @@ public class PublisherDaoJdbc implements PublisherDao{
 
     @Override
     public Publisher getByName(String name) {
-        return jdbc.queryForObject("SELECT * FROM publishers WHERE name=?", new Object[] {name}, new PublisherMapper());
+        return jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_name=?", new Object[] {name}, new PublisherMapper());
     }
 
     @Override
@@ -58,4 +58,13 @@ public class PublisherDaoJdbc implements PublisherDao{
         }
     }
 
+    public boolean existInDatabase(Publisher publisher){
+        System.out.println("TEMP: BEFORE QUERY");
+        String publisherName = publisher.getName();
+        System.out.println("Publisher Name: " + publisherName);
+//        Publisher temp = jdbc.query("SELECT * FROM publishers WHERE publisher_name=?", new Object[] {publisherName}, new PublisherMapper());
+        Publisher temp = getByName(publisherName);
+        System.out.println("TEMP: " + temp);
+        return temp == null ? false : true;
+    }
 }

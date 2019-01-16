@@ -1,7 +1,9 @@
 package com.prus.library.shell;
 
 import com.prus.library.dao.BookDao;
+import com.prus.library.domain.Author;
 import com.prus.library.domain.Book;
+import com.prus.library.domain.Publisher;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -53,9 +55,13 @@ public class BookCommands {
         }
     }
 
-    @ShellMethod("Add book: NAME ISBN YEAR TYPE PUBLISHER_ID AUTHOR_ID")
-    public void addBook(String name, int isbn, int year, String type, int publisher_id, int author_id){
-        Book book = new Book(name, isbn, year, type, publisher_id, author_id);
+    @ShellMethod("Add book: NAME ISBN YEAR TYPE AUTHOR-FIRST-NAME AUTHOR-LAST-NAME PUBLISHER COUNTRY")
+    public void addBook(String name, int isbn, int year, String type,
+                        String authorFirstName, String authorLastName,
+                        String publisher, String country){
+        Book book = new Book(name, isbn, year, type,
+                new Publisher(publisher, country),
+                new Author(authorFirstName, authorLastName));
         dao.insert(book);
     }
 

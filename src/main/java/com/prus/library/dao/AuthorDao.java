@@ -15,4 +15,6 @@ public interface AuthorDao {
     void insert(Author author);
 
     List<Author> getAll();
+
+    boolean existInDatabase(Author author);
 }

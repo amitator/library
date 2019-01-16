@@ -7,28 +7,26 @@ public class Book {
     private final int isbn;
     private final int year;
     private final String type;
-    private final long publisherId;
-    private final long authorId;
     private Author author;
     private Publisher publisher;
 
-    public Book(String name, int isbn, int year, String type, int publisherId, int authorId){
+    public Book(String name, int isbn, int year, String type, Publisher publisher, Author author){
         this.name = name;
         this.isbn = isbn;
         this.year = year;
         this.type = type;
-        this.publisherId = publisherId;
-        this.authorId = authorId;
+        this.publisher = publisher;
+        this.author = author;
     }
 
-    public Book(int id, String name, int isbn, int year, String type, int publisherId, int authorId){
+    public Book(int id, String name, int isbn, int year, String type, Publisher publisher, Author author){
         this.id = id;
         this.name = name;
         this.isbn = isbn;
         this.year = year;
         this.type = type;
-        this.publisherId = publisherId;
-        this.authorId = authorId;
+        this.publisher = publisher;
+        this.author = author;
     }
 
     public long getId() {
@@ -51,20 +49,12 @@ public class Book {
         return type;
     }
 
-    public long getPublisherId() {
-        return publisherId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthor(Author author){
-        this.author = author;
-    }
-
-    public void setPublisher(Publisher publisher){
-        this.publisher = publisher;
+    public Publisher getPublisher() {
+        return publisher;
     }
 
     @Override
@@ -77,6 +67,7 @@ public class Book {
         sb.append("Type: ").append(type).append("\n");
         sb.append("Author: ").append(author.getFirstName()).append(" ").append(author.getLastName()).append("\n");
         sb.append("Publisher: ").append(publisher.getName()).append("\n");
+        sb.append("Publisher's Country: ").append(publisher.getCountry()).append("\n");
         return sb.toString();
     }
 }

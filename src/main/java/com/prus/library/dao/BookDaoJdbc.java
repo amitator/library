@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -29,34 +28,75 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public void insert(Book book) {
+        long publisherId;
+        String publisherName = book.getPublisher().getName();
+        String publisherCountry = book.getPublisher().getCountry();
+        Publisher publisher = new Publisher(publisherName, publisherCountry);
+
+        if (publisherDao.existInDatabase(publisher)){
+            publisherId = publisher.getPublisherId();
+        } else {
+            jdbc.update("INSERT INTO publishers (`publisher_name`, `country`) " +
+                            "VALUES (?, ?)", publisherName, publisherCountry);
+            publisherId = publisherDao.getByName(publisherName).getPublisherId();
+        }
+
+        long authorId = 0;
+        String authorFirstName = book.getAuthor().getFirstName();
+        String authorLastName = book.getAuthor().getLastName();
+        Author author = new Author(authorFirstName, authorLastName);
+
+        if (authorDao.existInDatabase(author)){
+            authorId = author.getAuthorId();
+        } else {
+            jdbc.update("INSERT INTO authors (`first_name`, `last_name`) " +
+                            "VALUES (?, ?)", authorFirstName, authorLastName);
+            authorId = publisherDao.getByName(publisherName).getPublisherId();
+        }
+
         jdbc.update("INSERT INTO books (`name`, isbn, year, `type`, publisher_id, author_id) VALUES (?, ?, ?, ?, ?, ?)",
                 book.getName(),
                 book.getIsbn(),
                 book.getYear(),
                 book.getType(),
-                book.getPublisherId(),
-                book.getAuthorId());
+                publisherId,
+                authorId);
     }
 
     @Override
     public Book getById(long id) {
-        Book book = jdbc.queryForObject("SELECT * FROM books  WHERE id=?", new Object[] {id}, new BookMapper());
-        getAuthor(book);
-        return getPublisher(book);
+        Book book = jdbc.queryForObject("SELECT * " +
+                "FROM books b " +
+                "LEFT JOIN publishers p " +
+                "ON b.publisher_id=p.publisher_id " +
+                "LEFT JOIN authors a " +
+                "ON b.author_id=a.author_id " +
+                "WHERE id=?", new Object[] {id}, new BookMapper());
+        return book;
     }
 
     @Override
     public List<Book> getByYear(int year) {
-        List<Book> list = jdbc.query("SELECT * FROM books WHERE year=?", new Object[] {year}, new BookMapper());
-        getPublisherList(list);
-        return getAuthorsList(list);
+        List<Book> list = jdbc.query("SELECT * " +
+                "FROM books b " +
+                "LEFT JOIN publishers p " +
+                "ON b.publisher_id=p.publisher_id " +
+                "LEFT JOIN authors a " +
+                "ON b.author_id=a.author_id " +
+                "WHERE year=?", new Object[] {year}, new BookMapper());
+        return list;
     }
 
     @Override
     public List<Book> getByType(String type) {
-        List<Book> list = jdbc.query("SELECT * FROM books WHERE type=?", new Object[] {type}, new BookMapper());
-        getPublisherList(list);
-        return getAuthorsList(list);
+        List<Book> list = jdbc.query("SELECT * " +
+                "FROM books b " +
+                "LEFT JOIN publishers p " +
+                "ON b.publisher_id=p.publisher_id " +
+                "LEFT JOIN authors a " +
+                "ON b.author_id=a.author_id " +
+                "WHERE type=?", new Object[] {type}, new BookMapper());
+        return list;
     }
 
     @Override
@@ -66,48 +106,24 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public List<Book> getByPublisher(String name) {
-        Publisher publisher = publisherDao.getByName(name);
-        List<Book> result = new ArrayList<>();
-        List<Book> list = getAll();
-        for(Book b: list){
-            if(b.getPublisherId() == publisher.getPublisherId()){
-                result.add(b);
-            }
-        }
-        return result;
+        List<Book> list = jdbc.query("SELECT * " +
+                "FROM books b " +
+                "LEFT JOIN publishers p " +
+                "ON b.publisher_id=p.publisher_id " +
+                "LEFT JOIN authors a " +
+                "ON b.author_id=a.author_id " +
+                "WHERE publisher_name=?", new Object[] {name}, new BookMapper());
+        return list;
     }
 
     @Override
     public List<Book> getAll() {
-        List<Book> list = jdbc.query("SELECT * FROM books", new BookMapper());
-        list = getPublisherList(list);
-        return getAuthorsList(list);
-    }
-
-    private List<Book> getAuthorsList(List<Book> list){
-        for(Book b: list){
-            getAuthor(b);
-        }
-        return list;
-    }
-
-    private Book getAuthor(Book book){
-        Author author = authorDao.getById(book.getAuthorId());
-        book.setAuthor(author);
-        return book;
-    }
-
-    private Book getPublisher(Book book){
-        Publisher publisher = publisherDao.getById(book.getAuthorId());
-        book.setPublisher(publisher);
-        return book;
-    }
-
-    private List<Book> getPublisherList(List<Book> list){
-        for (Book b : list) {
-            Publisher publisher = publisherDao.getById(b.getPublisherId());
-            b.setPublisher(publisher);
-        }
+        List<Book> list = jdbc.query("SELECT * " +
+                "FROM books b " +
+                "LEFT JOIN publishers p " +
+                "ON b.publisher_id=p.publisher_id " +
+                "LEFT JOIN authors a " +
+                "ON b.author_id=a.author_id ", new BookMapper());
         return list;
     }
 
@@ -120,10 +136,14 @@ public class BookDaoJdbc implements BookDao {
             int isbn = rs.getInt("isbn");
             int year = rs.getInt("year");
             String type = rs.getString("type");
-            int publisher_id = rs.getInt("publisher_id");
-            int author_id = rs.getInt("author_id");
+            int publisherId = rs.getInt("publisher_id");
+            int authorId = rs.getInt("author_id");
+            String publisherName = rs.getString("publisher_name");
+            String country = rs.getString("country");
+            String authorFirstName = rs.getString("first_name");
+            String authorLastName = rs.getString("last_name");
 
-            return new Book(id, name, isbn, year, type, publisher_id, author_id);
+            return new Book(id, name, isbn, year, type, new Publisher(publisherName, country), new Author(authorFirstName, authorLastName));
         }
     }
 }
