@@ -51,7 +51,7 @@ public class PublisherDaoJdbc implements PublisherDao{
         @Override
         public Publisher mapRow(ResultSet rs, int rowNum) throws SQLException {
             int id = rs.getInt("publisher_id");
-            String name = rs.getString("name");
+            String name = rs.getString("publisher_name");
             String country = rs.getString("country");
 
             return new Publisher(id, name, country);
@@ -63,8 +63,14 @@ public class PublisherDaoJdbc implements PublisherDao{
         String publisherName = publisher.getName();
         System.out.println("Publisher Name: " + publisherName);
 //        Publisher temp = jdbc.query("SELECT * FROM publishers WHERE publisher_name=?", new Object[] {publisherName}, new PublisherMapper());
-        Publisher temp = getByName(publisherName);
+        Publisher temp;
+        try {
+            temp = getByName(publisherName);
+        }catch (Exception e){
+//            System.out.println("TEMP: " + temp);
+            return false;
+        }
         System.out.println("TEMP: " + temp);
-        return temp == null ? false : true;
+        return true;
     }
 }

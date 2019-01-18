@@ -58,7 +58,14 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     public boolean existInDatabase(Author author){
-        Author temp = jdbc.queryForObject("SELECT * FROM authors WHERE first_name=? AND last_name=?", new Object[] {author.getFirstName(), author.getLastName()}, new AuthorMapper());
-        return temp == null ? false : true;
+//        Author temp = jdbc.queryForObject("SELECT * FROM authors WHERE first_name=? AND last_name=?", new Object[] {author.getFirstName(), author.getLastName()}, new AuthorMapper());
+        List<Author> temp = getByLastName(author.getLastName());
+        for (Author a : temp){
+            if (a.getFirstName().equalsIgnoreCase(author.getFirstName())){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

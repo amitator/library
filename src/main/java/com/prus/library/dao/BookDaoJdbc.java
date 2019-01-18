@@ -34,6 +34,7 @@ public class BookDaoJdbc implements BookDao {
         Publisher publisher = new Publisher(publisherName, publisherCountry);
 
         if (publisherDao.existInDatabase(publisher)){
+            publisher = publisherDao.getByName(publisherName);
             publisherId = publisher.getPublisherId();
         } else {
             jdbc.update("INSERT INTO publishers (`publisher_name`, `country`) " +
@@ -51,7 +52,12 @@ public class BookDaoJdbc implements BookDao {
         } else {
             jdbc.update("INSERT INTO authors (`first_name`, `last_name`) " +
                             "VALUES (?, ?)", authorFirstName, authorLastName);
-            authorId = publisherDao.getByName(publisherName).getPublisherId();
+            List<Author> temp = authorDao.getByFirstName(authorFirstName);
+            for (Author a : temp){
+                if (a.getLastName().equalsIgnoreCase(authorLastName)){
+                    authorId = a.getAuthorId();
+                }
+            }
         }
 
         jdbc.update("INSERT INTO books (`name`, isbn, year, `type`, publisher_id, author_id) VALUES (?, ?, ?, ?, ?, ?)",
