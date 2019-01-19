@@ -1,5 +1,6 @@
 package com.prus.library.dao;
 
+import com.prus.library.domain.Author;
 import com.prus.library.domain.Book;
 import com.prus.library.domain.Publisher;
 import org.junit.Test;
@@ -52,14 +53,16 @@ public class BookDaoJdbcTest {
         }
 
 
-//    @Test
-//    public void insertTest(){
-//        Book book = new Book("TestBook", 5555555, 2019, "TestType", 3, 4);
-//        dao.insert(book);
-//        assertThat(dao.getAll().size()).isEqualTo(8);
-//        book = dao.getById(8);
-//        assertThat(book.getId()).isEqualTo(8);
-//        assertThat(book.getName()).isEqualTo("TestBook");
-//    }
+    @Test
+    public void insertTest(){
+        Book book = new Book("TestBook", 5555555, 2019, "TestType",
+                new Publisher("TEST NAME", "TEST COUNTRY"),
+                new Author("TEST FIRST", "TEST SECOND"));
+        dao.insert(book);
+        assertThat(dao.getAll().size()).isEqualTo(8);
+        book = dao.getById(8);
+        assertThat(book.getId()).isEqualTo(8);
+        assertThat(book.getName()).isEqualTo("TestBook");
+    }
 
 }

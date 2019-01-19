@@ -29,29 +29,32 @@ public class BookDaoJdbc implements BookDao {
     @Override
     public void insert(Book book) {
         long publisherId;
-        String publisherName = book.getPublisher().getName();
-        String publisherCountry = book.getPublisher().getCountry();
-        Publisher publisher = new Publisher(publisherName, publisherCountry);
+        Publisher publisher = book.getPublisher();
+        String publisherName = publisher.getName();
+        String publisherCountry = publisher.getCountry();
 
         if (publisherDao.existInDatabase(publisher)){
             publisher = publisherDao.getByName(publisherName);
             publisherId = publisher.getPublisherId();
         } else {
-            jdbc.update("INSERT INTO publishers (`publisher_name`, `country`) " +
-                            "VALUES (?, ?)", publisherName, publisherCountry);
+            publisherDao.insert(new Publisher(publisherName, publisherCountry));
             publisherId = publisherDao.getByName(publisherName).getPublisherId();
         }
 
         long authorId = 0;
-        String authorFirstName = book.getAuthor().getFirstName();
-        String authorLastName = book.getAuthor().getLastName();
-        Author author = new Author(authorFirstName, authorLastName);
+        Author author = book.getAuthor();
+        String authorFirstName = author.getFirstName();
+        String authorLastName = author.getLastName();
 
         if (authorDao.existInDatabase(author)){
-            authorId = author.getAuthorId();
+            List<Author> temp = authorDao.getByLastName(authorLastName);
+            for (Author a : temp){
+                if (author.getFirstName().equalsIgnoreCase(authorFirstName)){
+                    authorId = a.getAuthorId();
+                }
+            }
         } else {
-            jdbc.update("INSERT INTO authors (`first_name`, `last_name`) " +
-                            "VALUES (?, ?)", authorFirstName, authorLastName);
+            authorDao.insert(new Author(authorFirstName, authorLastName));
             List<Author> temp = authorDao.getByFirstName(authorFirstName);
             for (Author a : temp){
                 if (a.getLastName().equalsIgnoreCase(authorLastName)){

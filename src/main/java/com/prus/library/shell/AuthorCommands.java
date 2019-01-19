@@ -17,8 +17,8 @@ public class AuthorCommands {
     }
 
     @ShellMethod("Add author: FIRST_NAME LAST_NAME")
-    public void addAuthor(String first_name, String last_name){
-        Author author = new Author(first_name, last_name);
+    public void addAuthor(String firstName, String lastName){
+        Author author = new Author(firstName, lastName);
         dao.insert(author);
     }
 
