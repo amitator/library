@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -51,7 +50,7 @@ public class AuthorDaoJdbcTest {
     @Test
     public void insertTest(){
         Author author = new Author("TestAuthor", "TestAuthorLast");
-        dao.insert(author);
+        assertThat(dao.insert(author)).isEqualTo(8);
         assertThat(dao.getAll().size()).isEqualTo(8);
         author = dao.getById(8);
         assertThat(author.getAuthorId()).isEqualTo(8);

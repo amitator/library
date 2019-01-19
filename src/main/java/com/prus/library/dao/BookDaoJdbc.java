@@ -47,20 +47,9 @@ public class BookDaoJdbc implements BookDao {
         String authorLastName = author.getLastName();
 
         if (authorDao.existInDatabase(author)){
-            List<Author> temp = authorDao.getByLastName(authorLastName);
-            for (Author a : temp){
-                if (author.getFirstName().equalsIgnoreCase(authorFirstName)){
-                    authorId = a.getAuthorId();
-                }
-            }
+            authorId = authorDao.getByFullName(authorFirstName, authorLastName).getAuthorId();
         } else {
-            authorDao.insert(new Author(authorFirstName, authorLastName));
-            List<Author> temp = authorDao.getByFirstName(authorFirstName);
-            for (Author a : temp){
-                if (a.getLastName().equalsIgnoreCase(authorLastName)){
-                    authorId = a.getAuthorId();
-                }
-            }
+            authorId = authorDao.insert(new Author(authorFirstName, authorLastName));
         }
 
         jdbc.update("INSERT INTO books (`name`, isbn, year, `type`, publisher_id, author_id) VALUES (?, ?, ?, ?, ?, ?)",

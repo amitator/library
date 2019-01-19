@@ -3,6 +3,8 @@ package com.prus.library.dao;
 import com.prus.library.domain.Author;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -43,17 +45,19 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public void insert(Author author) {
+    public int insert(Author author) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
         if (!existInDatabase(author)) {
             jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
                     author.getFirstName(),
-                    author.getLastName());
+                    author.getLastName(), keyHolder);
         } else {
             System.out.println("Author " +
                 author.getFirstName() + " " +
                 author.getLastName() +
                 " already exist in database.");
         }
+        return keyHolder.getKey().intValue();
     }
 
     private static class AuthorMapper implements RowMapper<Author> {
