@@ -41,9 +41,15 @@ public class PublisherDaoJdbc implements PublisherDao{
 
     @Override
     public void insert(Publisher publisher) {
-        jdbc.update("INSERT INTO publishers (PUBLISHER_NAME, COUNTRY) VALUES (?, ?)",
-                publisher.getName(),
-                publisher.getCountry());
+        if (existInDatabase(publisher)) {
+            jdbc.update("INSERT INTO publishers (PUBLISHER_NAME, COUNTRY) VALUES (?, ?)",
+                    publisher.getName(),
+                    publisher.getCountry());
+        } else {
+            System.out.println("Publisher " +
+                publisher.getName() +
+                " already in database.");
+        }
     }
 
     private static class PublisherMapper implements RowMapper<Publisher> {

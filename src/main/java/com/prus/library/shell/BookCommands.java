@@ -8,6 +8,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import java.util.List;
+import java.util.concurrent.RecursiveTask;
+import java.util.stream.Collectors;
 
 @ShellComponent
 public class BookCommands {
@@ -19,40 +21,28 @@ public class BookCommands {
     }
 
     @ShellMethod("Get all books")
-    public void getAllBooks(){
-        List<Book> list = dao.getAll();
-        for(Book book: list){
-            System.out.println(book);
-        }
+    public String getAllBooks(){
+        return dao.getAll().stream().map(Book::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get book by ID")
-    public void getBookById(long id){
-        System.out.println(dao.getById(id));
+    public String getBookById(long id){
+        return dao.getById(id).toString();
     }
 
     @ShellMethod("Get books by YEAR")
-    public void getBookByYear(int year){
-        List<Book> list = dao.getByYear(year);
-        for(Book book: list){
-            System.out.println(book);
-        }
+    public String getBookByYear(int year){
+        return dao.getByYear(year).stream().map(Book::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get books by TYPE")
-    public void getBookByType(String type){
-        List<Book> list = dao.getByType(type);
-        for(Book book: list){
-            System.out.println(book);
-        }
+    public String getBookByType(String type){
+        return dao.getByType(type).stream().map(Book::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get books by PUBLISHER")
-    public void getBookByPublisher(String name){
-        List<Book> list = dao.getByPublisher(name);
-        for(Book book: list){
-            System.out.println(book);
-        }
+    public String getBookByPublisher(String name){
+        return dao.getByPublisher(name).stream().map(Book::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Add book: NAME ISBN YEAR TYPE AUTHOR-FIRST-NAME AUTHOR-LAST-NAME PUBLISHER COUNTRY")

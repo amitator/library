@@ -6,6 +6,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ShellComponent
 public class PublisherCommands {
@@ -23,30 +24,23 @@ public class PublisherCommands {
     }
 
     @ShellMethod("Get all publishers")
-    public void getAllPublishers(){
-        List<Publisher> list = dao.getAll();
-        for(Publisher publisher: list){
-            System.out.println(publisher);
-        }
+    public String getAllPublishers(){
+        return dao.getAll().stream().map(Publisher::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get publisher by ID")
-    public void getPublisherById(long id){
-        System.out.println(dao.getById(id));
+    public String getPublisherById(long id){
+        return dao.getById(id).toString();
     }
 
     @ShellMethod("Get publisher by NAME")
-    public void getPublisherByName(String name){
-        Publisher publisher = dao.getByName(name);
-        System.out.println(publisher);
+    public String getPublisherByName(String name){
+        return dao.getByName(name).toString();
     }
 
     @ShellMethod("Get publisher by COUNTRY")
-    public void getPublisherByCountry(String country){
-        List<Publisher> list = dao.getByCountry(country);
-        for(Publisher publisher: list){
-            System.out.println(publisher);
-        }
+    public String getPublisherByCountry(String country){
+        return dao.getByCountry(country).toString();
     }
 
 

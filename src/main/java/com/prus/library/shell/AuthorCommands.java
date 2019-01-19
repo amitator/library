@@ -6,6 +6,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ShellComponent
 public class AuthorCommands {
@@ -23,32 +24,28 @@ public class AuthorCommands {
     }
 
     @ShellMethod("Get all authors")
-    public void getAllAuthors(){
-        List<Author> list = dao.getAll();
-        for(Author author: list){
-            System.out.println(author);
-        }
+    public String getAllAuthors(){
+        return dao.getAll().stream().map(Author::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get author by ID")
-    public void getAuthorById(long id){
-        System.out.println(dao.getById(id));
+    public String getAuthorById(long id){
+        return dao.getById(id).toString();
     }
 
     @ShellMethod("Get authors by FIRST NAME")
-    public void getAuthorsByFirstName(String firstName){
-        List<Author> list = dao.getByFirstName(firstName);
-        for(Author author: list){
-            System.out.println(author);
-        }
+    public String getAuthorsByFirstName(String firstName){
+        return dao.getByFirstName(firstName).stream().map(Author::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get authors by LAST NAME")
-    public void getAuthorsByLastName(String lastName){
-        List<Author> list = dao.getByLastName(lastName);
-        for(Author author: list){
-            System.out.println(author);
-        }
+    public String getAuthorsByLastName(String lastName){
+        return dao.getByLastName(lastName).stream().map(Author::toString).collect(Collectors.joining("\n"));
+    }
+
+    @ShellMethod("Get authors by FIRSTNAME LASTNAME")
+    public String getAuthorByFullName(String firstName, String lastName){
+        return dao.getByFullName(firstName, lastName).toString();
     }
 
 }

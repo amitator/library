@@ -17,4 +17,6 @@ public interface AuthorDao {
     List<Author> getAll();
 
     boolean existInDatabase(Author author);
+
+    Author getByFullName(String f, String l);
 }

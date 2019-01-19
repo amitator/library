@@ -38,11 +38,22 @@ public class AuthorDaoJdbc implements AuthorDao {
         return jdbc.query("SELECT * FROM authors WHERE last_name=?", new Object[] {lastName}, new AuthorMapper());
     }
 
+    public Author getByFullName(String firstName, String lastName) {
+        return jdbc.queryForObject("SELECT * FROM authors WHERE first_name=? AND last_name=?", new Object[] {firstName, lastName}, new AuthorMapper());
+    }
+
     @Override
     public void insert(Author author) {
-        jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
-                author.getFirstName(),
-                author.getLastName());
+        if (!existInDatabase(author)) {
+            jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
+                    author.getFirstName(),
+                    author.getLastName());
+        } else {
+            System.out.println("Author " +
+                author.getFirstName() + " " +
+                author.getLastName() +
+                " already exist in database.");
+        }
     }
 
     private static class AuthorMapper implements RowMapper<Author> {
@@ -58,14 +69,10 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     public boolean existInDatabase(Author author){
-//        Author temp = jdbc.queryForObject("SELECT * FROM authors WHERE first_name=? AND last_name=?", new Object[] {author.getFirstName(), author.getLastName()}, new AuthorMapper());
-        List<Author> temp = getByLastName(author.getLastName());
-        for (Author a : temp){
-            if (a.getFirstName().equalsIgnoreCase(author.getFirstName())){
-                return true;
-            }
+        if (getByFullName(author.getFirstName(), author.getLastName()) != null){
+            return true;
         }
-
         return false;
     }
+
 }
