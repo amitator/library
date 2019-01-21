@@ -2,10 +2,15 @@ package com.prus.library.dao;
 
 import com.prus.library.domain.Publisher;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -40,16 +45,24 @@ public class PublisherDaoJdbc implements PublisherDao{
     }
 
     @Override
-    public void insert(Publisher publisher) {
+    public long insert(Publisher publisher) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
         if (!existInDatabase(publisher)) {
-            jdbc.update("INSERT INTO publishers (PUBLISHER_NAME, COUNTRY) VALUES (?, ?)",
-                    publisher.getName(),
-                    publisher.getCountry());
+            final String query = "INSERT INTO publishers (PUBLISHER_NAME, COUNTRY) VALUES (?, ?)";
+            jdbc.update(new PreparedStatementCreator() {
+                @Override
+                public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                    PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+                    ps.setString(1, publisher.getName());
+                    ps.setString(2, publisher.getCountry());
+                    return ps;
+                }
+            }, keyHolder);
         } else {
-            System.out.println("Publisher " +
-                publisher.getName() +
-                " already in database.");
+            return -1L;
         }
+        return keyHolder.getKey().longValue();
     }
 
     private static class PublisherMapper implements RowMapper<Publisher> {

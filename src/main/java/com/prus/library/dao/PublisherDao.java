@@ -12,7 +12,7 @@ public interface PublisherDao {
 
     List<Publisher> getByCountry(String country);
 
-    void insert(Publisher author);
+    long insert(Publisher author);
 
     List<Publisher> getAll();
 

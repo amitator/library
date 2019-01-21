@@ -28,21 +28,14 @@ public class BookDaoJdbc implements BookDao {
 
     @Override
     public void insert(Book book) {
-        long publisherId;
         Publisher publisher = book.getPublisher();
-        String publisherName = publisher.getName();
-        String publisherCountry = publisher.getCountry();
-
-        if (publisherDao.existInDatabase(publisher)){
-            publisher = publisherDao.getByName(publisherName);
-            publisherId = publisher.getPublisherId();
-        } else {
-            publisherDao.insert(new Publisher(publisherName, publisherCountry));
-            publisherId = publisherDao.getByName(publisherName).getPublisherId();
+        long publisherId = publisherDao.insert(publisher);
+        if (publisherId == -1L){
+            publisherId = publisherDao.getByName(publisher.getName()).getPublisherId();
         }
 
         Author author = book.getAuthor();
-        long authorId = authorDao.insert(new Author(author.getFirstName(),author.getLastName()));
+        long authorId = authorDao.insert(author);
         if (authorId == -1L){
             authorId = authorDao.getByFullName(author.getFirstName(),author.getLastName()).getAuthorId();
         }

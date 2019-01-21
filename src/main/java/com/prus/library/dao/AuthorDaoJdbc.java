@@ -53,7 +53,6 @@ public class AuthorDaoJdbc implements AuthorDao {
 
         if (!existInDatabase(author)) {
             final String query = "INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)";
-            System.out.println(query);
             jdbc.update(new PreparedStatementCreator() {
                 @Override
                 public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
