@@ -50,24 +50,23 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public long insert(Author author) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        String query = String.format("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (%s, %s)", author.getFirstName(), author.getLastName());
-        jdbc.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-                return null;
-            }
-        })
-//        if (!existInDatabase(author)) {
+
+        if (!existInDatabase(author)) {
+            String query = String.format("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (%s, %s)", author.getFirstName(), author.getLastName());
+            jdbc.update(new PreparedStatementCreator() {
+                @Override
+                public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                    PreparedStatement ps = con.prepareStatement(query);
+                    return ps;
+                }
+            }, keyHolder);
 //            jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
 //                    author.getFirstName(),
 //                    author.getLastName(), keyHolder);
-//        } else {
-//            System.out.println("Author " +1
-//                author.getFirstName() + " " +
-//                author.getLastName() +
-//                " already exist in database.");
-//        }
-        return keyHolder.getKey().intValue();
+        } else {
+            return -1L;
+        }
+        return keyHolder.getKey().longValue();
     }
 
     private static class AuthorMapper implements RowMapper<Author> {
