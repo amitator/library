@@ -18,26 +18,23 @@ public class AuthorCommandsTest {
 
     @Test
     public void getAuthorById(){
-        System.out.println(shell.evaluate(() -> "get-author-by-id 1"));
         assertThat(shell.evaluate(() -> "get-author-by-id 1")).isEqualTo("ID: 1\n" +
                 "First name: JOSHUA\n" +
                 "Last name: BLOCH\n");
     }
 
-//    @Test
-//    public void getAuthorsByFirstNameTest(){
-//        System.out.println(shell.evaluate(() -> "get-authors-by-first-name BRUCE"));
-//        assertThat(shell.evaluate(() -> "get-author-by-id 1")).isEqualTo("ID: 3\n" +
-//                "First name: BRUCE\n" +
-//                "Last name: ECKEL\n");
-//    }
+    @Test
+    public void getAuthorsByFirstNameTest(){
+        assertThat(shell.evaluate(() -> "get-authors-by-first-name BRUCE")).isEqualTo("ID: 3\n" +
+                "First name: BRUCE\n" +
+                "Last name: ECKEL\n");
+    }
 
-//    @Test
-//    public void getAuthorsByLastNameTest(){
-//        System.out.println(shell.evaluate(() -> "get-authors-by-last-name \"WALLS\""));
-//        assertThat(shell.evaluate(() -> "get-author-by-id 1")).isEqualTo("ID: 7\n" +
-//                "First name: CRAIG\n" +
-//                "Last name: WALLS\n");
-//    }
+    @Test
+    public void getAuthorsByLastNameTest(){
+        assertThat(shell.evaluate(() -> "get-authors-by-last-name WALLS")).isEqualTo("ID: 7\n" +
+                "First name: CRAIG\n" +
+                "Last name: WALLS\n");
+    }
 
 }
