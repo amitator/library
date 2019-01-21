@@ -41,15 +41,10 @@ public class BookDaoJdbc implements BookDao {
             publisherId = publisherDao.getByName(publisherName).getPublisherId();
         }
 
-        long authorId = 0;
         Author author = book.getAuthor();
-        String authorFirstName = author.getFirstName();
-        String authorLastName = author.getLastName();
-
-        if (authorDao.existInDatabase(author)){
-            authorId = authorDao.getByFullName(authorFirstName, authorLastName).getAuthorId();
-        } else {
-            authorId = authorDao.insert(new Author(authorFirstName, authorLastName));
+        long authorId = authorDao.insert(new Author(author.getFirstName(),author.getLastName()));
+        if (authorId == -1L){
+            authorId = authorDao.getByFullName(author.getFirstName(),author.getLastName()).getAuthorId();
         }
 
         jdbc.update("INSERT INTO books (`name`, isbn, year, `type`, publisher_id, author_id) VALUES (?, ?, ?, ?, ?, ?)",

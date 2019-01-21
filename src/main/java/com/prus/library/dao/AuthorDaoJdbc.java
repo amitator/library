@@ -52,17 +52,17 @@ public class AuthorDaoJdbc implements AuthorDao {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         if (!existInDatabase(author)) {
-            String query = String.format("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (%s, %s)", author.getFirstName(), author.getLastName());
+            final String query = "INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)";
+            System.out.println(query);
             jdbc.update(new PreparedStatementCreator() {
                 @Override
                 public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-                    PreparedStatement ps = con.prepareStatement(query);
+                    PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+                    ps.setString(1, author.getFirstName());
+                    ps.setString(2, author.getLastName());
                     return ps;
                 }
             }, keyHolder);
-//            jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
-//                    author.getFirstName(),
-//                    author.getLastName(), keyHolder);
         } else {
             return -1L;
         }
@@ -82,10 +82,13 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     public boolean existInDatabase(Author author){
-        if (getByFullName(author.getFirstName(), author.getLastName()) != null){
-            return true;
+        try {
+            Author temp = getByFullName(author.getFirstName(), author.getLastName());
+        }catch (Exception e){
+            return false;
         }
-        return false;
+        return true;
+
     }
 
 }

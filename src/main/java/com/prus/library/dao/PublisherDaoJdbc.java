@@ -41,7 +41,7 @@ public class PublisherDaoJdbc implements PublisherDao{
 
     @Override
     public void insert(Publisher publisher) {
-        if (existInDatabase(publisher)) {
+        if (!existInDatabase(publisher)) {
             jdbc.update("INSERT INTO publishers (PUBLISHER_NAME, COUNTRY) VALUES (?, ?)",
                     publisher.getName(),
                     publisher.getCountry());
@@ -66,9 +66,8 @@ public class PublisherDaoJdbc implements PublisherDao{
 
     public boolean existInDatabase(Publisher publisher){
         String publisherName = publisher.getName();
-        Publisher temp;
         try {
-            temp = getByName(publisherName);
+            Publisher temp = getByName(publisherName);
         }catch (Exception e){
             return false;
         }
