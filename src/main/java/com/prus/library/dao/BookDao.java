@@ -10,15 +10,15 @@ public interface BookDao {
 
     void insert(Book book);
 
-    Book getById(int id);
+    Book getById(long id);
 
-    Book getByYear(int year);
+    List<Book> getByYear(int year);
 
-    Book getByType(String type);
+    List<Book> getByType(String type);
 
-    Book getByAuthor(Author author);
+    List<Book> getByAuthor(Author author);
 
-    Book getByPublisher(Publisher publisher);
+    List<Book> getByPublisher(String name);
 
     List<Book> getAll();
 }

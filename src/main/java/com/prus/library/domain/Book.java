@@ -1,25 +1,35 @@
 package com.prus.library.domain;
 
 public class Book {
-    private final int id;
+
+    private long id;
     private final String name;
     private final int isbn;
     private final int year;
     private final String type;
-    private final int publisher_id;
-    private final int author_id;
+    private Author author;
+    private Publisher publisher;
 
-    public Book(int id, String name, int isbn, int year, String type, int publisher_id, int author_id){
+    public Book(String name, int isbn, int year, String type, Publisher publisher, Author author){
+        this.name = name;
+        this.isbn = isbn;
+        this.year = year;
+        this.type = type;
+        this.publisher = publisher;
+        this.author = author;
+    }
+
+    public Book(int id, String name, int isbn, int year, String type, Publisher publisher, Author author){
         this.id = id;
         this.name = name;
         this.isbn = isbn;
         this.year = year;
         this.type = type;
-        this.publisher_id = publisher_id;
-        this.author_id = author_id;
+        this.publisher = publisher;
+        this.author = author;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -39,11 +49,25 @@ public class Book {
         return type;
     }
 
-    public int getPublisher_id() {
-        return publisher_id;
+    public Author getAuthor() {
+        return author;
     }
 
-    public int getAuthor_id() {
-        return author_id;
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(id).append("\n");
+        sb.append("Book name: ").append(name).append("\n");
+        sb.append("ISBN: ").append(isbn).append("\n");
+        sb.append("Year: ").append(year).append("\n");
+        sb.append("Type: ").append(type).append("\n");
+        sb.append("Author: ").append(author.getFirstName()).append(" ").append(author.getLastName()).append("\n");
+        sb.append("Publisher: ").append(publisher.getName()).append("\n");
+        sb.append("Publisher's Country: ").append(publisher.getCountry()).append("\n");
+        return sb.toString();
     }
 }
