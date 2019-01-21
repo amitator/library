@@ -12,7 +12,7 @@ public interface AuthorDao {
 
     List<Author> getByLastName(String lastName);
 
-    int insert(Author author);
+    long insert(Author author);
 
     List<Author> getAll();
 

@@ -2,11 +2,14 @@ package com.prus.library.dao;
 
 import com.prus.library.domain.Author;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -45,18 +48,25 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public int insert(Author author) {
+    public long insert(Author author) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        if (!existInDatabase(author)) {
-            jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
-                    author.getFirstName(),
-                    author.getLastName(), keyHolder);
-        } else {
-            System.out.println("Author " +
-                author.getFirstName() + " " +
-                author.getLastName() +
-                " already exist in database.");
-        }
+        String query = String.format("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (%s, %s)", author.getFirstName(), author.getLastName());
+        jdbc.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                return null;
+            }
+        })
+//        if (!existInDatabase(author)) {
+//            jdbc.update("INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)",
+//                    author.getFirstName(),
+//                    author.getLastName(), keyHolder);
+//        } else {
+//            System.out.println("Author " +1
+//                author.getFirstName() + " " +
+//                author.getLastName() +
+//                " already exist in database.");
+//        }
         return keyHolder.getKey().intValue();
     }
 
