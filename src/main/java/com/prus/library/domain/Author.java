@@ -1,6 +1,14 @@
 package com.prus.library.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Author {
+
+    @Id
+    @GeneratedValue
     private long authorId;
     private final String firstName;
     private final String lastName;

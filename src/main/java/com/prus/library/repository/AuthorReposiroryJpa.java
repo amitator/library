@@ -15,7 +15,7 @@ public class AuthorReposiroryJpa implements AuthorRepository{
 
     @Override
     public Author getById(long id) {
-        return null;
+        return em.find(Author.class, id);
     }
 
     @Override

@@ -1,6 +1,14 @@
 package com.prus.library.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Publisher {
+
+    @Id
+    @GeneratedValue
     private long publisherId;
     private final String name;
     private final String country;
