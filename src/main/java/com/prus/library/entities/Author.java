@@ -1,10 +1,9 @@
-package com.prus.library.domain;
+package com.prus.library.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="authors")
 public class Author {
 
     @Id
@@ -24,14 +23,17 @@ public class Author {
         this.lastName = lastName;
     }
 
+    @Column(name = "author_id", nullable = false, insertable = true, updatable = true)
     public long getAuthorId() {
         return authorId;
     }
 
+    @Column(name = "first_name", nullable = false, insertable = true, updatable = true, length = 60)
     public String getFirstName() {
         return firstName;
     }
 
+    @Column(name = "last_name", nullable = false, insertable = true, updatable = true, length = 60)
     public String getLastName() {
         return lastName;
     }

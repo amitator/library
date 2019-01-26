@@ -1,10 +1,9 @@
-package com.prus.library.domain;
+package com.prus.library.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "publishers")
 public class Publisher {
 
     @Id
@@ -24,14 +23,17 @@ public class Publisher {
         this.country = country;
     }
 
+    @Column(name = "publisher_id", nullable = false)
     public long getPublisherId() {
         return publisherId;
     }
 
+    @Column(name = "publisher_namre", nullable = false, length = 100)
     public String getName() {
         return name;
     }
 
+    @Column(name = "country", length = 2)
     public String getCountry() {
         return country;
     }

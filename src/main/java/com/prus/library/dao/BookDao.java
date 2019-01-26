@@ -1,8 +1,7 @@
 package com.prus.library.dao;
 
-import com.prus.library.domain.Author;
-import com.prus.library.domain.Book;
-import com.prus.library.domain.Publisher;
+import com.prus.library.entities.Author;
+import com.prus.library.entities.Book;
 
 import java.util.List;
 

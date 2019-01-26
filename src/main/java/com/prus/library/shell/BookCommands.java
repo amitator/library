@@ -1,14 +1,12 @@
 package com.prus.library.shell;
 
 import com.prus.library.dao.BookDao;
-import com.prus.library.domain.Author;
-import com.prus.library.domain.Book;
-import com.prus.library.domain.Publisher;
+import com.prus.library.entities.Author;
+import com.prus.library.entities.Book;
+import com.prus.library.entities.Publisher;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import java.util.List;
-import java.util.concurrent.RecursiveTask;
 import java.util.stream.Collectors;
 
 @ShellComponent

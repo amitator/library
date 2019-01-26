@@ -1,16 +1,13 @@
 package com.prus.library.dao;
 
-import com.prus.library.domain.Author;
-import com.prus.library.domain.Book;
-import com.prus.library.domain.Publisher;
+import com.prus.library.entities.Author;
+import com.prus.library.entities.Book;
+import com.prus.library.entities.Publisher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.jdbc.core.JdbcOperationsExtensionsKt;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;

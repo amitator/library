@@ -1,11 +1,10 @@
 package com.prus.library.shell;
 
 import com.prus.library.dao.AuthorDao;
-import com.prus.library.domain.Author;
+import com.prus.library.entities.Author;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @ShellComponent

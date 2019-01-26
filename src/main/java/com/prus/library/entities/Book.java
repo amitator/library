@@ -1,10 +1,9 @@
-package com.prus.library.domain;
+package com.prus.library.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
@@ -36,26 +35,32 @@ public class Book {
         this.author = author;
     }
 
+    @Column(name = "id", nullable = false)
     public long getId() {
         return id;
     }
 
+    @Column(name = "name", nullable = false, length = 100)
     public String getName() {
         return name;
     }
 
+    @Column(name = "isbn")
     public int getIsbn() {
         return isbn;
     }
 
+    @Column(name = "year")
     public int getYear() {
         return year;
     }
 
+    @Column(name = "type", length = 100)
     public String getType() {
         return type;
     }
 
+    @OneToMany(mappedBy = "author_id", cascade = CascadeType.ALL)
     public Author getAuthor() {
         return author;
     }

@@ -1,6 +1,6 @@
 package com.prus.library.dao;
 
-import com.prus.library.domain.Author;
+import com.prus.library.entities.Author;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;

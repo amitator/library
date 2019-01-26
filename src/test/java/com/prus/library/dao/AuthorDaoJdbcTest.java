@@ -1,6 +1,6 @@
 package com.prus.library.dao;
 
-import com.prus.library.domain.Author;
+import com.prus.library.entities.Author;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

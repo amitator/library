@@ -1,6 +1,6 @@
 package com.prus.library.repository;
 
-import com.prus.library.domain.Author;
+import com.prus.library.entities.Author;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -15,7 +15,8 @@ public class AuthorReposiroryJpa implements AuthorRepository{
 
     @Override
     public Author getById(long id) {
-        return em.find(Author.class, id);
+//        return em.find(Author.class, id);
+        return null;
     }
 
     @Override
@@ -31,6 +32,7 @@ public class AuthorReposiroryJpa implements AuthorRepository{
     @Override
     public long insert(Author author) {
         em.persist(author);
+        return 1L;
     }
 
     @Override

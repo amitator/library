@@ -1,6 +1,6 @@
 package com.prus.library.dao;
 
-import com.prus.library.domain.Publisher;
+import com.prus.library.entities.Publisher;
 
 import java.util.List;
 

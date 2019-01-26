@@ -1,6 +1,6 @@
 package com.prus.library.repository;
 
-import com.prus.library.domain.Author;
+import com.prus.library.entities.Author;
 
 import java.util.List;
 
