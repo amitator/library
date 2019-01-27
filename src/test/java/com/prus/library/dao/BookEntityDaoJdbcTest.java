@@ -1,8 +1,8 @@
 package com.prus.library.dao;
 
-import com.prus.library.entities.Author;
-import com.prus.library.entities.Book;
-import com.prus.library.entities.Publisher;
+import com.prus.library.entities.AuthorEntity;
+import com.prus.library.entities.BookEntity;
+import com.prus.library.entities.PublisherEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @JdbcTest
 @Import({BookDaoJdbc.class, AuthorDaoJdbc.class, PublisherDaoJdbc.class})
-public class BookDaoJdbcTest {
+public class BookEntityDaoJdbcTest {
 
     @Autowired
     private BookDao dao;
@@ -30,21 +30,21 @@ public class BookDaoJdbcTest {
 
     @Test
     public void getByIdTest(){
-        Book book = dao.getById(1);
-        assertThat(book.getId()).isEqualTo(1);
-        assertThat(book.getName()).isEqualTo("EFFECTIVE JAVA");
+        BookEntity bookEntity = dao.getById(1);
+        assertThat(bookEntity.getId()).isEqualTo(1);
+        assertThat(bookEntity.getName()).isEqualTo("EFFECTIVE JAVA");
     }
 
     @Test
     public void getByYearTest(){
-        List<Book> list = dao.getByYear(2003);
+        List<BookEntity> list = dao.getByYear(2003);
         assertThat(list.size()).isEqualTo(1);
         assertThat(list.get(0).getYear()).isEqualTo(2003);
     }
 
     @Test
         public void getByTypeTest(){
-            List<Book> list = dao.getByType("Computer Science");
+            List<BookEntity> list = dao.getByType("Computer Science");
             assertThat(list.size()).isEqualTo(7);
             assertThat(list.get(0).getType()).isEqualTo("Computer Science");
         }
@@ -52,14 +52,14 @@ public class BookDaoJdbcTest {
 
     @Test
     public void insertTest(){
-        Book book = new Book("TestBook", 5555555, 2019, "TestType",
-                new Publisher("TEST NAME", "TEST COUNTRY"),
-                new Author("TEST FIRST", "TEST SECOND"));
-        dao.insert(book);
+        BookEntity bookEntity = new BookEntity("TestBook", 5555555, 2019, "TestType",
+                new PublisherEntity("TEST NAME", "TEST COUNTRY"),
+                new AuthorEntity("TEST FIRST", "TEST SECOND"));
+        dao.insert(bookEntity);
         assertThat(dao.getAll().size()).isEqualTo(8);
-        book = dao.getById(8);
-        assertThat(book.getId()).isEqualTo(8);
-        assertThat(book.getName()).isEqualTo("TestBook");
+        bookEntity = dao.getById(8);
+        assertThat(bookEntity.getId()).isEqualTo(8);
+        assertThat(bookEntity.getName()).isEqualTo("TestBook");
     }
 
 }

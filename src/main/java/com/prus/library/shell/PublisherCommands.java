@@ -1,7 +1,7 @@
 package com.prus.library.shell;
 
 import com.prus.library.dao.PublisherDao;
-import com.prus.library.entities.Publisher;
+import com.prus.library.entities.PublisherEntity;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -18,13 +18,13 @@ public class PublisherCommands {
 
     @ShellMethod("Add publisher: NAME COUNTRY")
     public void addPublisher(String name, String country){
-        Publisher publisher = new Publisher(name, country);
-        dao.insert(publisher);
+        PublisherEntity publisherEntity = new PublisherEntity(name, country);
+        dao.insert(publisherEntity);
     }
 
     @ShellMethod("Get all publishers")
     public String getAllPublishers(){
-        return dao.getAll().stream().map(Publisher::toString).collect(Collectors.joining("\n"));
+        return dao.getAll().stream().map(PublisherEntity::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get publisher by ID")

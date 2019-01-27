@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PublisherCommandsTest {
+public class PublisherEntityCommandsTest {
 
     @Autowired
     private Shell shell;

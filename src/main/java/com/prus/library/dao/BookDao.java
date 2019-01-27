@@ -1,23 +1,23 @@
 package com.prus.library.dao;
 
-import com.prus.library.entities.Author;
-import com.prus.library.entities.Book;
+import com.prus.library.entities.AuthorEntity;
+import com.prus.library.entities.BookEntity;
 
 import java.util.List;
 
 public interface BookDao {
 
-    void insert(Book book);
+    void insert(BookEntity bookEntity);
 
-    Book getById(long id);
+    BookEntity getById(long id);
 
-    List<Book> getByYear(int year);
+    List<BookEntity> getByYear(int year);
 
-    List<Book> getByType(String type);
+    List<BookEntity> getByType(String type);
 
-    List<Book> getByAuthor(Author author);
+    List<BookEntity> getByAuthor(AuthorEntity authorEntity);
 
-    List<Book> getByPublisher(String name);
+    List<BookEntity> getByPublisher(String name);
 
-    List<Book> getAll();
+    List<BookEntity> getAll();
 }

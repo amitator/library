@@ -1,10 +1,10 @@
-package com.prus.library.dao;
+package com.prus.library.repository;
 
 import com.prus.library.entities.AuthorEntity;
 
 import java.util.List;
 
-public interface AuthorDao {
+public interface AuthorRepository1 {
 
     AuthorEntity getById(long id);
 

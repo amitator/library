@@ -1,6 +1,6 @@
 package com.prus.library.dao;
 
-import com.prus.library.entities.Publisher;
+import com.prus.library.entities.PublisherEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @JdbcTest
 @Import(PublisherDaoJdbc.class)
-public class PublisherDaoJdbcTest {
+public class PublisherEntityDaoJdbcTest {
 
     @Autowired
     private PublisherDao dao;
@@ -28,32 +28,32 @@ public class PublisherDaoJdbcTest {
 
     @Test
     public void getByIdTest(){
-        Publisher publisher = dao.getById(1);
-        assertThat(publisher.getPublisherId()).isEqualTo(1);
-        assertThat(publisher.getPublisherId()).isEqualTo(1);
+        PublisherEntity publisherEntity = dao.getById(1);
+        assertThat(publisherEntity.getPublisherId()).isEqualTo(1);
+        assertThat(publisherEntity.getPublisherId()).isEqualTo(1);
     }
 
     @Test
     public void getByNameTest(){
-        Publisher publisher = dao.getByName("MANNING");
-        assertThat(publisher.getName()).isEqualTo("MANNING");
+        PublisherEntity publisherEntity = dao.getByName("MANNING");
+        assertThat(publisherEntity.getName()).isEqualTo("MANNING");
     }
 
     @Test
     public void getByCountryTest(){
-        List<Publisher> list = dao.getByCountry("US");
+        List<PublisherEntity> list = dao.getByCountry("US");
         assertThat(list.size()).isEqualTo(4);
         assertThat(list.get(0).getCountry()).isEqualTo("US");
     }
 
     @Test
     public void insertTest(){
-        Publisher publisher = new Publisher("TestPublisher", "TestPublisher");
-        dao.insert(publisher);
+        PublisherEntity publisherEntity = new PublisherEntity("TestPublisher", "TestPublisher");
+        dao.insert(publisherEntity);
         assertThat(dao.getAll().size()).isEqualTo(5);
-        publisher = dao.getById(5);
-        assertThat(publisher.getPublisherId()).isEqualTo(5);
-        assertThat(publisher.getName()).isEqualTo("TestPublisher");
+        publisherEntity = dao.getById(5);
+        assertThat(publisherEntity.getPublisherId()).isEqualTo(5);
+        assertThat(publisherEntity.getName()).isEqualTo("TestPublisher");
     }
 
 }

@@ -1,6 +1,6 @@
 package com.prus.library.dao;
 
-import com.prus.library.entities.Publisher;
+import com.prus.library.entities.PublisherEntity;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,37 +24,37 @@ public class PublisherDaoJdbc implements PublisherDao{
     }
 
     @Override
-    public List<Publisher> getAll() {
+    public List<PublisherEntity> getAll() {
         return jdbc.query("SELECT * FROM publishers", new PublisherMapper());
     }
 
     @Override
-    public Publisher getById(long id) {
+    public PublisherEntity getById(long id) {
         return jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_id=?", new Object[] {id}, new PublisherMapper());
     }
 
     @Override
-    public Publisher getByName(String name) {
+    public PublisherEntity getByName(String name) {
         return jdbc.queryForObject("SELECT * FROM publishers WHERE publisher_name=?", new Object[] {name}, new PublisherMapper());
     }
 
     @Override
-    public List<Publisher> getByCountry(String country) {
+    public List<PublisherEntity> getByCountry(String country) {
         return jdbc.query("SELECT * FROM publishers WHERE country=?", new Object[] {country}, new PublisherMapper());
     }
 
     @Override
-    public long insert(Publisher publisher) {
+    public long insert(PublisherEntity publisherEntity) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        if (!existInDatabase(publisher)) {
+        if (!existInDatabase(publisherEntity)) {
             final String query = "INSERT INTO publishers (PUBLISHER_NAME, COUNTRY) VALUES (?, ?)";
             jdbc.update(new PreparedStatementCreator() {
                 @Override
                 public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                     PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-                    ps.setString(1, publisher.getName());
-                    ps.setString(2, publisher.getCountry());
+                    ps.setString(1, publisherEntity.getName());
+                    ps.setString(2, publisherEntity.getCountry());
                     return ps;
                 }
             }, keyHolder);
@@ -64,22 +64,22 @@ public class PublisherDaoJdbc implements PublisherDao{
         return keyHolder.getKey().longValue();
     }
 
-    private static class PublisherMapper implements RowMapper<Publisher> {
+    private static class PublisherMapper implements RowMapper<PublisherEntity> {
 
         @Override
-        public Publisher mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public PublisherEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             int id = rs.getInt("publisher_id");
             String name = rs.getString("publisher_name");
             String country = rs.getString("country");
 
-            return new Publisher(id, name, country);
+            return new PublisherEntity(id, name, country);
         }
     }
 
-    public boolean existInDatabase(Publisher publisher){
-        String publisherName = publisher.getName();
+    public boolean existInDatabase(PublisherEntity publisherEntity){
+        String publisherName = publisherEntity.getName();
         try {
-            Publisher temp = getByName(publisherName);
+            PublisherEntity temp = getByName(publisherName);
         }catch (Exception e){
             return false;
         }

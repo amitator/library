@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="authors")
-public class Author {
+public class AuthorEntity {
 
     @Id
     @GeneratedValue
@@ -12,12 +12,12 @@ public class Author {
     private final String firstName;
     private final String lastName;
 
-    public Author(String firstName, String lastName){
+    public AuthorEntity(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Author(long authorId, String firstName, String lastName){
+    public AuthorEntity(long authorId, String firstName, String lastName){
         this.authorId = authorId;
         this.firstName = firstName;
         this.lastName = lastName;

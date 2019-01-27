@@ -1,22 +1,12 @@
 package com.prus.library.repository;
 
-import com.prus.library.entities.Author;
+import com.prus.library.entities.AuthorEntity;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface AuthorRepository {
+public interface AuthorRepository extends CrudRepository<AuthorEntity, Integer>{
 
-    Author getById(long id);
-
-    List<Author> getByFirstName(String firstName);
-
-    List<Author> getByLastName(String lastName);
-
-    long insert(Author author);
-
-    List<Author> getAll();
-
-    boolean existInDatabase(Author author);
-
-    Author getByFullName(String f, String l);
+    List<AuthorEntity> findByFirstName(String Name);
+    List<AuthorEntity> findByFirstAndLastName(String firstName, String lastName);
 }

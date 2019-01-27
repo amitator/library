@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "publishers")
-public class Publisher {
+public class PublisherEntity {
 
     @Id
     @GeneratedValue
@@ -12,12 +12,12 @@ public class Publisher {
     private final String name;
     private final String country;
 
-    public Publisher(String name, String country){
+    public PublisherEntity(String name, String country){
         this.name = name;
         this.country = country;
     }
 
-    public Publisher(int publisherId, String name, String country){
+    public PublisherEntity(int publisherId, String name, String country){
         this.publisherId = publisherId;
         this.name = name;
         this.country = country;

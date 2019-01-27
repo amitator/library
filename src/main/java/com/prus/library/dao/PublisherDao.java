@@ -1,20 +1,20 @@
 package com.prus.library.dao;
 
-import com.prus.library.entities.Publisher;
+import com.prus.library.entities.PublisherEntity;
 
 import java.util.List;
 
 public interface PublisherDao {
 
-    Publisher getById(long id);
+    PublisherEntity getById(long id);
 
-    Publisher getByName(String name);
+    PublisherEntity getByName(String name);
 
-    List<Publisher> getByCountry(String country);
+    List<PublisherEntity> getByCountry(String country);
 
-    long insert(Publisher author);
+    long insert(PublisherEntity author);
 
-    List<Publisher> getAll();
+    List<PublisherEntity> getAll();
 
-    boolean existInDatabase(Publisher publisher);
+    boolean existInDatabase(PublisherEntity publisherEntity);
 }

@@ -1,8 +1,8 @@
 package com.prus.library.dao;
 
-import com.prus.library.entities.Author;
-import com.prus.library.entities.Book;
-import com.prus.library.entities.Publisher;
+import com.prus.library.entities.AuthorEntity;
+import com.prus.library.entities.BookEntity;
+import com.prus.library.entities.PublisherEntity;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -27,43 +27,43 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public void insert(Book book) {
-        Publisher publisher = book.getPublisher();
-        long publisherId = publisherDao.insert(publisher);
+    public void insert(BookEntity bookEntity) {
+        PublisherEntity publisherEntity = bookEntity.getPublisherEntity();
+        long publisherId = publisherDao.insert(publisherEntity);
         if (publisherId == -1L){
-            publisherId = publisherDao.getByName(publisher.getName()).getPublisherId();
+            publisherId = publisherDao.getByName(publisherEntity.getName()).getPublisherId();
         }
 
-        Author author = book.getAuthor();
-        long authorId = authorDao.insert(author);
+        AuthorEntity authorEntity = bookEntity.getAuthorEntity();
+        long authorId = authorDao.insert(authorEntity);
         if (authorId == -1L){
-            authorId = authorDao.getByFullName(author.getFirstName(),author.getLastName()).getAuthorId();
+            authorId = authorDao.getByFullName(authorEntity.getFirstName(), authorEntity.getLastName()).getAuthorId();
         }
 
         jdbc.update("INSERT INTO books (`name`, isbn, year, `type`, publisher_id, author_id) VALUES (?, ?, ?, ?, ?, ?)",
-                book.getName(),
-                book.getIsbn(),
-                book.getYear(),
-                book.getType(),
+                bookEntity.getName(),
+                bookEntity.getIsbn(),
+                bookEntity.getYear(),
+                bookEntity.getType(),
                 publisherId,
                 authorId);
     }
 
     @Override
-    public Book getById(long id) {
-        Book book = jdbc.queryForObject("SELECT * " +
+    public BookEntity getById(long id) {
+        BookEntity bookEntity = jdbc.queryForObject("SELECT * " +
                 "FROM books b " +
                 "LEFT JOIN publishers p " +
                 "ON b.publisher_id=p.publisher_id " +
                 "LEFT JOIN authors a " +
                 "ON b.author_id=a.author_id " +
                 "WHERE id=?", new Object[] {id}, new BookMapper());
-        return book;
+        return bookEntity;
     }
 
     @Override
-    public List<Book> getByYear(int year) {
-        List<Book> list = jdbc.query("SELECT * " +
+    public List<BookEntity> getByYear(int year) {
+        List<BookEntity> list = jdbc.query("SELECT * " +
                 "FROM books b " +
                 "LEFT JOIN publishers p " +
                 "ON b.publisher_id=p.publisher_id " +
@@ -74,8 +74,8 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public List<Book> getByType(String type) {
-        List<Book> list = jdbc.query("SELECT * " +
+    public List<BookEntity> getByType(String type) {
+        List<BookEntity> list = jdbc.query("SELECT * " +
                 "FROM books b " +
                 "LEFT JOIN publishers p " +
                 "ON b.publisher_id=p.publisher_id " +
@@ -86,13 +86,13 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public List<Book> getByAuthor(Author author) {
+    public List<BookEntity> getByAuthor(AuthorEntity authorEntity) {
         return null;
     }
 
     @Override
-    public List<Book> getByPublisher(String name) {
-        List<Book> list = jdbc.query("SELECT * " +
+    public List<BookEntity> getByPublisher(String name) {
+        List<BookEntity> list = jdbc.query("SELECT * " +
                 "FROM books b " +
                 "LEFT JOIN publishers p " +
                 "ON b.publisher_id=p.publisher_id " +
@@ -103,8 +103,8 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public List<Book> getAll() {
-        List<Book> list = jdbc.query("SELECT * " +
+    public List<BookEntity> getAll() {
+        List<BookEntity> list = jdbc.query("SELECT * " +
                 "FROM books b " +
                 "LEFT JOIN publishers p " +
                 "ON b.publisher_id=p.publisher_id " +
@@ -113,10 +113,10 @@ public class BookDaoJdbc implements BookDao {
         return list;
     }
 
-    private static class BookMapper implements RowMapper<Book>{
+    private static class BookMapper implements RowMapper<BookEntity>{
 
         @Override
-        public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public BookEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             int isbn = rs.getInt("isbn");
@@ -129,7 +129,7 @@ public class BookDaoJdbc implements BookDao {
             String authorFirstName = rs.getString("first_name");
             String authorLastName = rs.getString("last_name");
 
-            return new Book(id, name, isbn, year, type, new Publisher(publisherName, country), new Author(authorFirstName, authorLastName));
+            return new BookEntity(id, name, isbn, year, type, new PublisherEntity(publisherName, country), new AuthorEntity(authorFirstName, authorLastName));
         }
     }
 }

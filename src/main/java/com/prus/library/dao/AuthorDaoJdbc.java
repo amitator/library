@@ -1,6 +1,6 @@
 package com.prus.library.dao;
 
-import com.prus.library.entities.Author;
+import com.prus.library.entities.AuthorEntity;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,41 +24,41 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public List<Author> getAll() {
+    public List<AuthorEntity> getAll() {
         return jdbc.query("SELECT * FROM authors", new AuthorMapper());
     }
 
     @Override
-    public Author getById(long id) {
+    public AuthorEntity getById(long id) {
         return jdbc.queryForObject("SELECT * FROM authors WHERE author_id=?", new Object[] {id}, new AuthorMapper());
     }
 
     @Override
-    public List<Author> getByFirstName(String firstName) {
+    public List<AuthorEntity> getByFirstName(String firstName) {
         return jdbc.query("SELECT * FROM authors WHERE first_name=?", new Object[] {firstName}, new AuthorMapper());
     }
 
     @Override
-    public List<Author> getByLastName(String lastName) {
+    public List<AuthorEntity> getByLastName(String lastName) {
         return jdbc.query("SELECT * FROM authors WHERE last_name=?", new Object[] {lastName}, new AuthorMapper());
     }
 
-    public Author getByFullName(String firstName, String lastName) {
+    public AuthorEntity getByFullName(String firstName, String lastName) {
         return jdbc.queryForObject("SELECT * FROM authors WHERE first_name=? AND last_name=?", new Object[] {firstName, lastName}, new AuthorMapper());
     }
 
     @Override
-    public long insert(Author author) {
+    public long insert(AuthorEntity authorEntity) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        if (!existInDatabase(author)) {
+        if (!existInDatabase(authorEntity)) {
             final String query = "INSERT INTO AUTHORS (FIRST_NAME, LAST_NAME) VALUES (?, ?)";
             jdbc.update(new PreparedStatementCreator() {
                 @Override
                 public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                     PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-                    ps.setString(1, author.getFirstName());
-                    ps.setString(2, author.getLastName());
+                    ps.setString(1, authorEntity.getFirstName());
+                    ps.setString(2, authorEntity.getLastName());
                     return ps;
                 }
             }, keyHolder);
@@ -68,21 +68,21 @@ public class AuthorDaoJdbc implements AuthorDao {
         return keyHolder.getKey().longValue();
     }
 
-    private static class AuthorMapper implements RowMapper<Author> {
+    private static class AuthorMapper implements RowMapper<AuthorEntity> {
 
         @Override
-        public Author mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public AuthorEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
             int id = rs.getInt("author_id");
             String firstName = rs.getString("first_name");
             String lastName = rs.getString("last_name");
 
-            return new Author(id, firstName, lastName);
+            return new AuthorEntity(id, firstName, lastName);
         }
     }
 
-    public boolean existInDatabase(Author author){
+    public boolean existInDatabase(AuthorEntity authorEntity){
         try {
-            Author temp = getByFullName(author.getFirstName(), author.getLastName());
+            AuthorEntity temp = getByFullName(authorEntity.getFirstName(), authorEntity.getLastName());
         }catch (Exception e){
             return false;
         }
