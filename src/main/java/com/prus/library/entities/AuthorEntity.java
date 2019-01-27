@@ -23,17 +23,17 @@ public class AuthorEntity {
         this.lastName = lastName;
     }
 
-    @Column(name = "author_id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "author_id", nullable = false)
     public long getAuthorId() {
         return authorId;
     }
 
-    @Column(name = "first_name", nullable = false, insertable = true, updatable = true, length = 60)
+    @Column(name = "first_name", nullable = false, length = 60)
     public String getFirstName() {
         return firstName;
     }
 
-    @Column(name = "last_name", nullable = false, insertable = true, updatable = true, length = 60)
+    @Column(name = "last_name", nullable = false, length = 60)
     public String getLastName() {
         return lastName;
     }

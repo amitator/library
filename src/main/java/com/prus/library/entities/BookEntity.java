@@ -60,12 +60,14 @@ public class BookEntity {
         return type;
     }
 
-    @OneToMany(mappedBy = "author_id", cascade = CascadeType.PERSIST)
+//    @OneToMany(mappedBy = "author_id", cascade = CascadeType.PERSIST)
+    @Column(name = "author_id")
     public AuthorEntity getAuthorEntity() {
         return authorEntity;
     }
 
-    @OneToMany(mappedBy = "publisher_id", cascade = CascadeType.PERSIST)
+//    @OneToMany(mappedBy = "publisher_id", cascade = CascadeType.PERSIST)
+    @Column(name = "publisher_id")
     public PublisherEntity getPublisherEntity() {
         return publisherEntity;
     }
