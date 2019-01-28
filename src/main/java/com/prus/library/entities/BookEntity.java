@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "books")
 public class BookEntity {
 
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     private long id;
     private final String name;
     private final int isbn;
@@ -35,6 +35,8 @@ public class BookEntity {
         this.authorEntity = authorEntity;
     }
 
+    @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public long getId() {
         return id;
@@ -61,7 +63,8 @@ public class BookEntity {
     }
 
 //    @OneToMany(mappedBy = "author_id", cascade = CascadeType.PERSIST)
-    @Column(name = "author_id")
+//    @Column(name = "author_id")
+    @JoinColumn(name = "author_id")
     public AuthorEntity getAuthorEntity() {
         return authorEntity;
     }

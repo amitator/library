@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name="authors")
 public class AuthorEntity {
 
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     private long authorId;
     private final String firstName;
     private final String lastName;
@@ -23,6 +23,8 @@ public class AuthorEntity {
         this.lastName = lastName;
     }
 
+    @Id
+    @GeneratedValue
     @Column(name = "author_id", nullable = false)
     public long getAuthorId() {
         return authorId;

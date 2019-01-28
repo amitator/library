@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "publishers")
 public class PublisherEntity {
 
-    @Id
-    @GeneratedValue
+//    @Id
+//    @GeneratedValue
     private long publisherId;
     private final String name;
     private final String country;
@@ -23,6 +23,8 @@ public class PublisherEntity {
         this.country = country;
     }
 
+    @Id
+    @GeneratedValue
     @Column(name = "publisher_id", nullable = false)
     public long getPublisherId() {
         return publisherId;
