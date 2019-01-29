@@ -6,42 +6,42 @@ import javax.persistence.*;
 @Table(name = "publishers")
 public class PublisherEntity {
 
-//    @Id
-//    @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name = "publisher_id", nullable = false)
     private long publisherId;
+
+    @Column(name = "publisher_namre", nullable = false, length = 100)
     private final String name;
+
+    @Column(name = "country", length = 2)
     private final String country;
 
-    public PublisherEntity(String name, String country){
+    public PublisherEntity(String name, String country) {
         this.name = name;
         this.country = country;
     }
 
-    public PublisherEntity(int publisherId, String name, String country){
+    public PublisherEntity(int publisherId, String name, String country) {
         this.publisherId = publisherId;
         this.name = name;
         this.country = country;
     }
 
-    @Id
-    @GeneratedValue
-    @Column(name = "publisher_id", nullable = false)
     public long getPublisherId() {
         return publisherId;
     }
 
-    @Column(name = "publisher_namre", nullable = false, length = 100)
     public String getName() {
         return name;
     }
 
-    @Column(name = "country", length = 2)
     public String getCountry() {
         return country;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ID: ").append(publisherId).append("\n");
         sb.append("Name: ").append(name).append("\n");

@@ -6,14 +6,29 @@ import javax.persistence.*;
 @Table(name = "books")
 public class BookEntity {
 
-//    @Id
-//    @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
     private long id;
+
+    @Column(name = "name", nullable = false, length = 100)
     private final String name;
+
+    @Column(name = "isbn")
     private final int isbn;
+
+    @Column(name = "year")
     private final int year;
+
+    @Column(name = "type", length = 100)
     private final String type;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "author_id")
     private AuthorEntity authorEntity;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "publisher_id")
     private PublisherEntity publisherEntity;
 
     public BookEntity(String name, int isbn, int year, String type, PublisherEntity publisherEntity, AuthorEntity authorEntity){
@@ -35,42 +50,30 @@ public class BookEntity {
         this.authorEntity = authorEntity;
     }
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false)
     public long getId() {
         return id;
     }
 
-    @Column(name = "name", nullable = false, length = 100)
     public String getName() {
         return name;
     }
 
-    @Column(name = "isbn")
     public int getIsbn() {
         return isbn;
     }
 
-    @Column(name = "year")
     public int getYear() {
         return year;
     }
 
-    @Column(name = "type", length = 100)
     public String getType() {
         return type;
     }
 
-//    @OneToMany(mappedBy = "author_id", cascade = CascadeType.PERSIST)
-//    @Column(name = "author_id")
-    @JoinColumn(name = "author_id")
     public AuthorEntity getAuthorEntity() {
         return authorEntity;
     }
 
-//    @OneToMany(mappedBy = "publisher_id", cascade = CascadeType.PERSIST)
-    @Column(name = "publisher_id")
     public PublisherEntity getPublisherEntity() {
         return publisherEntity;
     }

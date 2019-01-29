@@ -3,7 +3,6 @@ package com.prus.library.services;
 import com.google.common.collect.Lists;
 import com.prus.library.entities.AuthorEntity;
 import com.prus.library.repository.AuthorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +12,14 @@ import java.util.List;
 //@Service("jpaAuthorService")
 @Repository
 @Transactional
-public class AuthorServiceImp implements AuthorService {
+public class AuthorServiceImpl implements AuthorService {
 
-    @Autowired
+//    @Autowired
     private AuthorRepository authorRepository;
+
+    public AuthorServiceImpl(AuthorRepository authorRepository){
+        this.authorRepository = authorRepository;
+    }
 
     @Override
     public List<AuthorEntity> findAll() {
@@ -27,8 +30,8 @@ public class AuthorServiceImp implements AuthorService {
         return authorRepository.findByFirstName(firstName);
     }
 
-    public List<AuthorEntity> findByFirstAndLastName(String firstName, String lastName){
-        return authorRepository.findByFirstAndLastName(firstName, lastName);
+    public List<AuthorEntity> findByFirstNameAndLastName(String firstName, String lastName){
+        return authorRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
 }

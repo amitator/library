@@ -6,10 +6,15 @@ import javax.persistence.*;
 @Table(name="authors")
 public class AuthorEntity {
 
-//    @Id
-//    @GeneratedValue
+    @Id
+    @GeneratedValue
+    @Column(name = "author_id", nullable = false)
     private long authorId;
+
+    @Column(name = "first_name", nullable = false, length = 60)
     private final String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 60)
     private final String lastName;
 
     public AuthorEntity(String firstName, String lastName){
@@ -23,19 +28,14 @@ public class AuthorEntity {
         this.lastName = lastName;
     }
 
-    @Id
-    @GeneratedValue
-    @Column(name = "author_id", nullable = false)
     public long getAuthorId() {
         return authorId;
     }
 
-    @Column(name = "first_name", nullable = false, length = 60)
     public String getFirstName() {
         return firstName;
     }
 
-    @Column(name = "last_name", nullable = false, length = 60)
     public String getLastName() {
         return lastName;
     }
