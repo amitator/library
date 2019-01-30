@@ -12,10 +12,12 @@ public class AuthorEntity {
     private long authorId;
 
     @Column(name = "first_name", nullable = false, length = 60)
-    private final String firstName;
+    private String firstName;
 
     @Column(name = "last_name", nullable = false, length = 60)
-    private final String lastName;
+    private String lastName;
+
+    public AuthorEntity(){}
 
     public AuthorEntity(String firstName, String lastName){
         this.firstName = firstName;
@@ -38,6 +40,18 @@ public class AuthorEntity {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
+    }
+
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
