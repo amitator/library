@@ -13,7 +13,6 @@ import java.util.List;
 @Transactional
 public class AuthorServiceImpl implements AuthorService {
 
-//    @Autowired
     private AuthorRepository authorRepository;
 
     public AuthorServiceImpl(AuthorRepository authorRepository){
@@ -29,8 +28,18 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.findByFirstName(firstName);
     }
 
-    public List<AuthorEntity> findByFirstNameAndLastName(String firstName, String lastName){
+    public List<AuthorEntity> findByLastName(String lastName) { return authorRepository.findByLastName(lastName); }
+
+    public AuthorEntity findByFirstNameAndLastName(String firstName, String lastName){
         return authorRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
+
+    public AuthorEntity getByAuthorId(long id) {
+        return authorRepository.getByAuthorId(id);
+    }
+
+    public void save(AuthorEntity authorEntity) {
+        authorRepository.save(authorEntity);
     }
 
 }

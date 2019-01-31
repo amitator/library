@@ -11,7 +11,7 @@ public class PublisherEntity {
     @Column(name = "publisher_id", nullable = false)
     private long publisherId;
 
-    @Column(name = "publisher_namre", nullable = false, length = 100)
+    @Column(name = "publisher_name", nullable = false, length = 100)
     private final String name;
 
     @Column(name = "country", length = 2)

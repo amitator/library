@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class AuthorEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "author_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "author_id", nullable = false, updatable = false)
     private long authorId;
 
     @Column(name = "first_name", nullable = false, length = 60)
