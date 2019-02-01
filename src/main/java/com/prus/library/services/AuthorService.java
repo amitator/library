@@ -11,4 +11,5 @@ public interface AuthorService {
     AuthorEntity findByFirstNameAndLastName(String firstName, String lastName);
     AuthorEntity getByAuthorId(long id);
     void save(AuthorEntity authorEntity);
+    void deleteByAuthorId(long id);
 }

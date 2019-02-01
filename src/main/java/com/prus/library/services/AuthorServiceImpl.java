@@ -6,6 +6,7 @@ import com.prus.library.repository.AuthorRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Id;
 import java.util.List;
 
 //@Service("jpaAuthorService")
@@ -42,4 +43,7 @@ public class AuthorServiceImpl implements AuthorService {
         authorRepository.save(authorEntity);
     }
 
+    public void deleteByAuthorId(long id) {
+        authorRepository.deleteByAuthorId(id);
+    }
 }

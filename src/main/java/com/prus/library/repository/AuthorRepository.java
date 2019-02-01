@@ -11,4 +11,5 @@ public interface AuthorRepository extends CrudRepository<AuthorEntity, Integer>{
     List<AuthorEntity> findByLastName(String Name);
     AuthorEntity findByFirstNameAndLastName(String firstName, String lastName);
     AuthorEntity getByAuthorId(long id);
+    void deleteByAuthorId(long id);
 }
