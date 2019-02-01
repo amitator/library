@@ -1,12 +1,11 @@
 package com.prus.library.repository;
 
 import com.prus.library.entities.AuthorEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AuthorRepository extends CrudRepository<AuthorEntity, Integer>{
-
+public interface AuthorRepository extends JpaRepository<AuthorEntity, Integer> {
     List<AuthorEntity> findByFirstName(String name);
     List<AuthorEntity> findByLastName(String name);
     AuthorEntity findByFirstNameAndLastName(String firstName, String lastName);

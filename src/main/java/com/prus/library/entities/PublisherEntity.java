@@ -1,7 +1,15 @@
 package com.prus.library.entities;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor(force = true)
 @Entity
 @Table(name = "publishers")
 public class PublisherEntity {
@@ -17,7 +25,8 @@ public class PublisherEntity {
     @Column(name = "country", length = 2)
     private String country;
 
-    public PublisherEntity() {}
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisherEntity")
+//    private List<BookEntity> books;
 
     public PublisherEntity(String name, String country) {
         this.name = name;
@@ -27,30 +36,6 @@ public class PublisherEntity {
     public PublisherEntity(int publisherId, String name, String country) {
         this.publisherId = publisherId;
         this.name = name;
-        this.country = country;
-    }
-
-    public long getPublisherId() {
-        return publisherId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setPublisherId(long publisherId) {
-        this.publisherId = publisherId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCountry(String country) {
         this.country = country;
     }
 

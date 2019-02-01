@@ -1,35 +1,44 @@
 package com.prus.library.entities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Setter
+@Getter
+@NoArgsConstructor(force = true)
 @Entity
 @Table(name = "books")
 public class BookEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private long id;
 
     @Column(name = "name", nullable = false, length = 100)
-    private final String name;
+    private String name;
 
     @Column(name = "isbn")
-    private final int isbn;
+    private int isbn;
 
     @Column(name = "year")
-    private final int year;
+    private int year;
 
     @Column(name = "type", length = 100)
-    private final String type;
+    private String type;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "author_id")
+    @OneToOne//(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "author_id", referencedColumnName = "author_id")
     private AuthorEntity authorEntity;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id")
     private PublisherEntity publisherEntity;
+
+//    public BookEntity() {}
 
     public BookEntity(String name, int isbn, int year, String type, PublisherEntity publisherEntity, AuthorEntity authorEntity){
         this.name = name;
@@ -50,33 +59,61 @@ public class BookEntity {
         this.authorEntity = authorEntity;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public AuthorEntity getAuthorEntity() {
-        return authorEntity;
-    }
-
-    public PublisherEntity getPublisherEntity() {
-        return publisherEntity;
-    }
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public int getIsbn() {
+//        return isbn;
+//    }
+//
+//    public int getYear() {
+//        return year;
+//    }
+//
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public AuthorEntity getAuthorEntity() {
+//        return authorEntity;
+//    }
+//
+//    public PublisherEntity getPublisherEntity() {
+//        return publisherEntity;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public void setIsbn(int isbn) {
+//        this.isbn = isbn;
+//    }
+//
+//    public void setYear(int year) {
+//        this.year = year;
+//    }
+//
+//    public void setType(String type) {
+//        this.type = type;
+//    }
+//
+//    public void setAuthorEntity(AuthorEntity authorEntity) {
+//        this.authorEntity = authorEntity;
+//    }
+//
+//    public void setPublisherEntity(PublisherEntity publisherEntity) {
+//        this.publisherEntity = publisherEntity;
+//    }
 
     @Override
     public String toString(){
