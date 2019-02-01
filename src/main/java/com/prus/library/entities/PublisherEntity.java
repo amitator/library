@@ -7,15 +7,17 @@ import javax.persistence.*;
 public class PublisherEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "publisher_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "publisher_id", nullable = false, updatable = false)
     private long publisherId;
 
     @Column(name = "publisher_name", nullable = false, length = 100)
-    private final String name;
+    private String name;
 
     @Column(name = "country", length = 2)
-    private final String country;
+    private String country;
+
+    public PublisherEntity() {}
 
     public PublisherEntity(String name, String country) {
         this.name = name;
@@ -38,6 +40,18 @@ public class PublisherEntity {
 
     public String getCountry() {
         return country;
+    }
+
+    public void setPublisherId(long publisherId) {
+        this.publisherId = publisherId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override
