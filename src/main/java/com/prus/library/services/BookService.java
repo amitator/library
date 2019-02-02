@@ -10,8 +10,8 @@ public interface BookService {
     BookEntity findById(long id);
     List<BookEntity> findByYear(int year);
     List<BookEntity> findByType(String type);
-//    List<BookEntity> findByAuthorId(Long id);
-    List<BookEntity> findByPublisherPublisherId(Long id);
+    List<BookEntity> findByAuthorEntityAuthorId(Long id);
+    List<BookEntity> findByPublisherEntityPublisherId(Long id);
     void save(BookEntity bookEntity);
 
 }

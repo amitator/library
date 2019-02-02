@@ -15,7 +15,7 @@ import java.util.List;
 public class PublisherServiceImpl implements PublisherService {
 
     private PublisherRepository publisherRepository;
-    
+
     @Override
     public List<PublisherEntity> findAll() {
         return Lists.newArrayList(publisherRepository.findAll());

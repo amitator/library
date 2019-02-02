@@ -9,9 +9,9 @@ import java.util.List;
 
 
 public interface BookRepository extends JpaRepository<BookEntity, Integer> {
-//    BookEntity findById(long id);
-//    List<BookEntity> findByYear(int year);
-//    List<BookEntity> findByType(String type);
-//    List<BookEntity> findByAuthorId(Long authorId);
+    BookEntity findById(long id);
+    List<BookEntity> findByYear(int year);
+    List<BookEntity> findByType(String type);
+    List<BookEntity> findByAuthorEntityAuthorId(Long authorId);
     List<BookEntity> findByPublisherEntityPublisherId(Long publisherId);
 }

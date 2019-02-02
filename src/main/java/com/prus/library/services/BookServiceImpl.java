@@ -22,26 +22,31 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public BookEntity findById(long id) {
-        return null;
+        return repository.findById(id);
     }
 
     @Override
     public List<BookEntity> findByYear(int year) {
-        return null;
+        return repository.findByYear(year);
     }
 
     @Override
     public List<BookEntity> findByType(String type) {
-        return null;
+        return findByType(type);
     }
 
     @Override
-    public List<BookEntity> findByPublisherPublisherId(Long id) {
-        return null;
+    public List<BookEntity> findByAuthorEntityAuthorId(Long id) {
+        return repository.findByAuthorEntityAuthorId(id);
+    }
+
+    @Override
+    public List<BookEntity> findByPublisherEntityPublisherId(Long id) {
+        return repository.findByPublisherEntityPublisherId(id);
     }
 
     @Override
     public void save(BookEntity bookEntity) {
-
+        repository.save(bookEntity);
     }
 }
