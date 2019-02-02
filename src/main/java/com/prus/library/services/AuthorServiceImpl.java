@@ -3,22 +3,18 @@ package com.prus.library.services;
 import com.google.common.collect.Lists;
 import com.prus.library.entities.AuthorEntity;
 import com.prus.library.repository.AuthorRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Id;
 import java.util.List;
 
-//@Service("jpaAuthorService")
+@AllArgsConstructor
 @Repository
 @Transactional
 public class AuthorServiceImpl implements AuthorService {
 
     private AuthorRepository authorRepository;
-
-    public AuthorServiceImpl(AuthorRepository authorRepository){
-        this.authorRepository = authorRepository;
-    }
 
     @Override
     public List<AuthorEntity> findAll() {

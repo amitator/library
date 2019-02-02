@@ -38,8 +38,6 @@ public class BookEntity {
     @JoinColumn(name = "publisher_id")
     private PublisherEntity publisherEntity;
 
-//    public BookEntity() {}
-
     public BookEntity(String name, int isbn, int year, String type, PublisherEntity publisherEntity, AuthorEntity authorEntity){
         this.name = name;
         this.isbn = isbn;
@@ -58,62 +56,6 @@ public class BookEntity {
         this.publisherEntity = publisherEntity;
         this.authorEntity = authorEntity;
     }
-
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public int getIsbn() {
-//        return isbn;
-//    }
-//
-//    public int getYear() {
-//        return year;
-//    }
-//
-//    public String getType() {
-//        return type;
-//    }
-//
-//    public AuthorEntity getAuthorEntity() {
-//        return authorEntity;
-//    }
-//
-//    public PublisherEntity getPublisherEntity() {
-//        return publisherEntity;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public void setIsbn(int isbn) {
-//        this.isbn = isbn;
-//    }
-//
-//    public void setYear(int year) {
-//        this.year = year;
-//    }
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
-//
-//    public void setAuthorEntity(AuthorEntity authorEntity) {
-//        this.authorEntity = authorEntity;
-//    }
-//
-//    public void setPublisherEntity(PublisherEntity publisherEntity) {
-//        this.publisherEntity = publisherEntity;
-//    }
 
     @Override
     public String toString(){

@@ -11,7 +11,7 @@ public interface BookService {
     List<BookEntity> findByYear(int year);
     List<BookEntity> findByType(String type);
 //    List<BookEntity> findByAuthorId(Long id);
-//    List<BookEntity> findByPublisherId(Long id);
+    List<BookEntity> findByPublisherPublisherId(Long id);
     void save(BookEntity bookEntity);
 
 }

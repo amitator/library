@@ -3,21 +3,19 @@ package com.prus.library.services;
 import com.google.common.collect.Lists;
 import com.prus.library.entities.PublisherEntity;
 import com.prus.library.repository.PublisherRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Repository
 @Transactional
 public class PublisherServiceImpl implements PublisherService {
 
     private PublisherRepository publisherRepository;
-
-    public PublisherServiceImpl (PublisherRepository publisherRepository) {
-        this.publisherRepository = publisherRepository;
-    }
-
+    
     @Override
     public List<PublisherEntity> findAll() {
         return Lists.newArrayList(publisherRepository.findAll());
