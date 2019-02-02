@@ -54,4 +54,9 @@ public class BookServiceImpl implements BookService{
     public void save(BookEntity bookEntity) {
         repository.save(bookEntity);
     }
+
+    @Override
+    public void deleteById(long id) {
+        repository.deleteById(id);
+    }
 }

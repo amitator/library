@@ -14,5 +14,6 @@ public interface BookService {
     List<BookEntity> findByAuthorEntityAuthorId(Long id);
     List<BookEntity> findByPublisherEntityPublisherId(Long id);
     void save(BookEntity bookEntity);
+    void deleteById(long id);
 
 }

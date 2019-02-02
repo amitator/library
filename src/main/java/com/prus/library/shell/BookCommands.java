@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -62,5 +61,10 @@ public class BookCommands {
         service.save(bookEntity);
     }
 
+    @ShellMethod("Delete book by ID")
+    public String deleteBookById(Long id){
+        service.deleteById(id);
+        return "Book with ID: " + id + " deleted.";
+    }
 
 }
