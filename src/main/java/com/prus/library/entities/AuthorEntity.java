@@ -35,30 +35,6 @@ public class AuthorEntity {
         this.lastName = lastName;
     }
 
-//    public long getAuthorId() {
-//        return authorId;
-//    }
-//
-//    public String getFirstName() {
-//        return firstName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName;
-//    }
-//
-//    public void setAuthorId(long authorId) {
-//        this.authorId = authorId;
-//    }
-//
-//    public void setFirstName(String firstName){
-//        this.firstName = firstName;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
-
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();

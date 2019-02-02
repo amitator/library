@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface BookService {
     List<BookEntity> findAll();
+    BookEntity findByName(String name);
     BookEntity findById(long id);
     List<BookEntity> findByYear(int year);
     List<BookEntity> findByType(String type);

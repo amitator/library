@@ -21,6 +21,11 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
+    public BookEntity findByName(String name) {
+        return repository.findByName(name);
+    }
+
+    @Override
     public BookEntity findById(long id) {
         return repository.findById(id);
     }
@@ -32,7 +37,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<BookEntity> findByType(String type) {
-        return findByType(type);
+        return repository.findByType(type);
     }
 
     @Override

@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,9 +23,6 @@ public class PublisherEntity {
 
     @Column(name = "country", length = 2)
     private String country;
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisherEntity")
-//    private List<BookEntity> books;
 
     public PublisherEntity(String name, String country) {
         this.name = name;

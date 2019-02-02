@@ -30,11 +30,11 @@ public class BookEntity {
     @Column(name = "type", length = 100)
     private String type;
 
-    @OneToOne//(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "author_id", referencedColumnName = "author_id")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "author_id", referencedColumnName = "author_id")
     private AuthorEntity authorEntity;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "publisher_id")
     private PublisherEntity publisherEntity;
 

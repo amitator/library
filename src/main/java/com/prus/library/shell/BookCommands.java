@@ -23,6 +23,11 @@ public class BookCommands {
     }
 
     @ShellMethod("Get book by ID")
+    public String getBookByName(String name){
+        return service.findByName(name).toString();
+    }
+
+    @ShellMethod("Get book by ID")
     public String getBookById(long id){
         return service.findById(id).toString();
     }
