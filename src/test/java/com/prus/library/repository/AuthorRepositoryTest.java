@@ -23,32 +23,39 @@ public class AuthorRepositoryTest {
         assertThat(repository.findAll()).size().isEqualTo(7);
     }
 
-    public void findByFirstName() {
-        List<AuthorEntity> list = repository.findByFirstName("BERT");
+    @Test
+    public void findByFirstNameTest() {
+        List<AuthorEntity> list = repository.findByFirstName("JOSHUA");
         assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getFirstName()).isEqualTo("BERT");
+        assertThat(list.get(0).getFirstName()).isEqualTo("JOSHUA");
     }
 
-    public void findByLastName() {
-        List<AuthorEntity> list = repository.findByLastName("MARTIN");
+    @Test
+    public void findByLastNameTest() {
+        List<AuthorEntity> list = repository.findByLastName("BLOCH");
         assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getLastName()).isEqualTo("MARTIN");
+        assertThat(list.get(0).getLastName()).isEqualTo("BLOCH");
     }
 
-    public void findByFirstNameAndLastName() {
-        AuthorEntity entity = repository.findByFirstNameAndLastName("BERT", "MARTIN");
-        assertThat(entity.getFirstName()).isEqualTo("BERT");
-        assertThat(entity.getLastName()).isEqualTo("MARTIN");
+    @Test
+    public void findByFirstNameAndLastNameTest() {
+        AuthorEntity entity = repository.findByFirstNameAndLastName("JOSHUA", "BLOCH");
+        assertThat(entity.getFirstName()).isEqualTo("JOSHUA");
+        assertThat(entity.getLastName()).isEqualTo("BLOCH");
     }
 
-    public void getByAuthorId() {
-        AuthorEntity authorEntity = repository.getByAuthorId(1);
-        assertThat(authorEntity.getAuthorId()).isEqualTo(1);
+    @Test
+    public void getByAuthorIdTest() {
+        AuthorEntity entity = repository.getByAuthorId(1);
+        assertThat(entity.getAuthorId()).isEqualTo(1);
     }
 
-    public void deleteByAuthorId() {
-        repository.deleteById(1);
-        assertThat(repository.findAll()).size().isEqualTo(6);
+    @Test
+    public void saveTest() {
+        repository.save(new AuthorEntity("TEST", "TESTLAST"));
+        AuthorEntity entity = repository.getByAuthorId(1);
+        assertThat(entity.getFirstName()).isEqualTo("JOSHUA");
+        repository.deleteByAuthorId(1L); //so Count would stay the same for deleteByAuthorIdTest()
     }
 
 }

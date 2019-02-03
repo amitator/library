@@ -13,7 +13,7 @@ public class AuthorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "author_id", nullable = false, updatable = false)
+    @Column(name = "author_id", nullable = false)
     private long authorId;
 
     @Column(name = "first_name", nullable = false, length = 60)
