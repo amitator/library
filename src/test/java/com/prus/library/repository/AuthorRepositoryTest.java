@@ -18,6 +18,9 @@ public class AuthorRepositoryTest {
     @Autowired
     private AuthorRepository repository;
 
+    private List<AuthorEntity> list;
+    private AuthorEntity entity;
+
     @Test
     public void findAllTest() {
         assertThat(repository.findAll()).size().isEqualTo(7);
@@ -25,28 +28,28 @@ public class AuthorRepositoryTest {
 
     @Test
     public void findByFirstNameTest() {
-        List<AuthorEntity> list = repository.findByFirstName("JOSHUA");
+        list = repository.findByFirstName("JOSHUA");
         assertThat(list.size()).isEqualTo(1);
         assertThat(list.get(0).getFirstName()).isEqualTo("JOSHUA");
     }
 
     @Test
     public void findByLastNameTest() {
-        List<AuthorEntity> list = repository.findByLastName("BLOCH");
+        list = repository.findByLastName("BLOCH");
         assertThat(list.size()).isEqualTo(1);
         assertThat(list.get(0).getLastName()).isEqualTo("BLOCH");
     }
 
     @Test
     public void findByFirstNameAndLastNameTest() {
-        AuthorEntity entity = repository.findByFirstNameAndLastName("JOSHUA", "BLOCH");
+        entity = repository.findByFirstNameAndLastName("JOSHUA", "BLOCH");
         assertThat(entity.getFirstName()).isEqualTo("JOSHUA");
         assertThat(entity.getLastName()).isEqualTo("BLOCH");
     }
 
     @Test
     public void getByAuthorIdTest() {
-        AuthorEntity entity = repository.getByAuthorId(1);
+        entity = repository.getByAuthorId(1);
         assertThat(entity.getAuthorId()).isEqualTo(1);
     }
 

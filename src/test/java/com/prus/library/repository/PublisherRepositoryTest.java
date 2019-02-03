@@ -24,21 +24,21 @@ public class PublisherRepositoryTest {
     }
 
     @Test
-    public void findByName() throws Exception {
+    public void findByNameTest() throws Exception {
         List<PublisherEntity> list = repository.findByName("MANNING");
         assertThat(list.size()).isEqualTo(1);
         assertThat(list.get(0).getName()).isEqualTo("MANNING");
     }
 
     @Test
-    public void findByCountry() throws Exception {
+    public void findByCountryTest() throws Exception {
         List<PublisherEntity> list = repository.findByCountry("US");
         assertThat(list.size()).isEqualTo(4);
         assertThat(list.get(0).getName()).isEqualTo("OREILLY");
     }
 
     @Test
-    public void findByPublisherId() throws Exception {
+    public void findByPublisherIdTest() throws Exception {
         PublisherEntity entity = repository.findByPublisherId(1);
         assertThat(entity.getPublisherId()).isEqualTo(1);
     }
