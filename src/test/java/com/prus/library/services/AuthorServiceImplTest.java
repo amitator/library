@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -19,15 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 public class AuthorServiceImplTest {
 
-    @Mock
+    @MockBean
     AuthorRepository mockRepo;
-
-    private List< AuthorEntity> list;
-    private AuthorEntity mockEntity;
 
     @Test
     public void findAllTest() throws Exception {
-        list = new ArrayList<>();
+        List< AuthorEntity> list = new ArrayList<>();
         list.add(new AuthorEntity("1", "1"));
         list.add(new AuthorEntity("2", "2"));
         list.add(new AuthorEntity("3", "3"));
@@ -39,7 +37,7 @@ public class AuthorServiceImplTest {
 
     @Test
     public void findByFirstNameTest() throws Exception {
-        list = new ArrayList<>();
+        List< AuthorEntity> list = new ArrayList<>();
         list.add(new AuthorEntity("1", "1"));
         list.add(new AuthorEntity("2", "2"));
         list.add(new AuthorEntity("3", "3"));
@@ -51,7 +49,7 @@ public class AuthorServiceImplTest {
 
     @Test
     public void findByLastNameTest() throws Exception {
-        list = new ArrayList<>();
+        List< AuthorEntity> list = new ArrayList<>();
         list.add(new AuthorEntity("1", "1"));
         list.add(new AuthorEntity("2", "2"));
         list.add(new AuthorEntity("3", "3"));
@@ -63,7 +61,7 @@ public class AuthorServiceImplTest {
 
     @Test
     public void findByFirstNameAndLastNameTest() throws Exception {
-        mockEntity = new AuthorEntity("1", "1");
+        AuthorEntity mockEntity = new AuthorEntity("1", "1");
         Mockito.when(mockRepo.findByFirstNameAndLastName("1", "1")).thenReturn(mockEntity);
         AuthorEntity test = mockRepo.findByFirstNameAndLastName("1", "1");
         assertEquals(mockEntity, test);
@@ -72,7 +70,7 @@ public class AuthorServiceImplTest {
 
     @Test
     public void getByAuthorIdTest() throws Exception {
-        mockEntity = new AuthorEntity("1", "1");
+        AuthorEntity mockEntity = new AuthorEntity("1", "1");
         Mockito.when(mockRepo.getByAuthorId(1)).thenReturn(mockEntity);
         AuthorEntity test = mockRepo.getByAuthorId(1);
         assertEquals(mockEntity, test);
