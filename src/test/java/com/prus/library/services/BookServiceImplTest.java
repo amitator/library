@@ -6,9 +6,9 @@ import com.prus.library.entities.PublisherEntity;
 import com.prus.library.repository.BookRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -20,15 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 public class BookServiceImplTest {
 
-    @Mock
+    @MockBean
     BookRepository mockRepo;
-
-    private List<BookEntity> list;
-    private BookEntity mockEntity;
 
     @Test
     public void findAllTest() throws Exception {
-        list = new ArrayList<>();
+        List<BookEntity> list = new ArrayList<>();
         list.add(new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME")));
@@ -43,7 +40,7 @@ public class BookServiceImplTest {
 
     @Test
     public void findByIdTest() throws Exception {
-        mockEntity = new BookEntity("NAME", 111111, 9999, "TYPE",
+        BookEntity mockEntity = new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME"));
         Mockito.when(mockRepo.findById(1)).thenReturn(mockEntity);
@@ -54,7 +51,7 @@ public class BookServiceImplTest {
 
     @Test
     public void findByNameTest() throws Exception {
-        mockEntity = new BookEntity("NAME", 111111, 9999, "TYPE",
+        BookEntity mockEntity = new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME"));
         Mockito.when(mockRepo.findByName("1")).thenReturn(mockEntity);
@@ -65,7 +62,7 @@ public class BookServiceImplTest {
 
     @Test
     public void findByYearTest() throws Exception {
-        list = new ArrayList<>();
+        List<BookEntity> list = new ArrayList<>();
         list.add(new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME")));
@@ -79,7 +76,7 @@ public class BookServiceImplTest {
     }
 
     public void findByTypeTest() throws Exception {
-        list = new ArrayList<>();
+        List<BookEntity> list = new ArrayList<>();
         list.add(new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME")));
@@ -94,7 +91,7 @@ public class BookServiceImplTest {
 
     @Test
     public void findByAuthorntityIdTest() throws Exception {
-        list = new ArrayList<>();
+        List<BookEntity> list = new ArrayList<>();
         list.add(new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME")));
@@ -109,7 +106,7 @@ public class BookServiceImplTest {
 
     @Test
     public void findByPublisherIdTest() throws Exception {
-        list = new ArrayList<>();
+        List<BookEntity> list = new ArrayList<>();
         list.add(new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME")));

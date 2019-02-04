@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -20,14 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 public class PublisherServiceImplTest {
 
-    @Mock
+    @MockBean
     PublisherRepository mockRepo;
-
-    private List<PublisherEntity> list;
 
     @Test
     public void findAllTest() throws Exception {
-        list = new ArrayList<>();
+        List<PublisherEntity> list = new ArrayList<>();
         list.add(new PublisherEntity("1", "1"));
         list.add(new PublisherEntity("2", "2"));
         list.add(new PublisherEntity("3", "3"));
@@ -39,7 +38,7 @@ public class PublisherServiceImplTest {
 
     @Test
     public void findByCountryTest() throws Exception {
-        list = new ArrayList<>();
+        List<PublisherEntity> list = new ArrayList<>();
         list.add(new PublisherEntity("1", "1"));
         list.add(new PublisherEntity("2", "2"));
         list.add(new PublisherEntity("3", "3"));
@@ -51,7 +50,7 @@ public class PublisherServiceImplTest {
 
     @Test
     public void findByNameTest() throws Exception {
-        list = new ArrayList<>();
+        List<PublisherEntity> list = new ArrayList<>();
         list.add(new PublisherEntity("1", "1"));
         list.add(new PublisherEntity("2", "2"));
         list.add(new PublisherEntity("3", "3"));
