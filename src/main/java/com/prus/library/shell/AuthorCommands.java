@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @ShellComponent
 public class AuthorCommands {
 
-//    private AuthorDao dao;
+//    private AuthorRepository dao;
 
     private AuthorService service;
 

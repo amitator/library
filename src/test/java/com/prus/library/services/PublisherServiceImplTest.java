@@ -1,12 +1,9 @@
 package com.prus.library.services;
 
-import com.prus.library.entities.AuthorEntity;
 import com.prus.library.entities.PublisherEntity;
-import com.prus.library.repository.AuthorRepository;
 import com.prus.library.repository.PublisherRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
