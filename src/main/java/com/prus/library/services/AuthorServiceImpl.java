@@ -18,7 +18,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<AuthorEntity> findAll() {
-        return Lists.newArrayList(authorRepository.findAll());
+        return Lists.newArrayList(authorRepository.getAll());
     }
 
     public List<AuthorEntity> findByFirstName(String firstName){
@@ -36,7 +36,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     public void save(AuthorEntity authorEntity) {
-        authorRepository.save(authorEntity);
+        authorRepository.insert(authorEntity);
     }
 
     public void deleteByAuthorId(long id) {

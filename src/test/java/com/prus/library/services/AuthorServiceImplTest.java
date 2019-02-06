@@ -28,10 +28,10 @@ public class AuthorServiceImplTest {
         list.add(new AuthorEntity("1", "1"));
         list.add(new AuthorEntity("2", "2"));
         list.add(new AuthorEntity("3", "3"));
-        Mockito.when(mockRepo.findAll()).thenReturn(list);
-        List<AuthorEntity> test = mockRepo.findAll();
+        Mockito.when(mockRepo.getAll()).thenReturn(list);
+        List<AuthorEntity> test = mockRepo.getAll();
         assertEquals(list, test);
-        Mockito.verify(mockRepo).findAll();
+        Mockito.verify(mockRepo).getAll();
     }
 
     @Test

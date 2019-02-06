@@ -1,14 +1,18 @@
 package com.prus.library.repository;
 
 import com.prus.library.entities.AuthorEntity;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
-//https://www.boraji.com/spring-4-hibernate-5-jpa-2-integration-example
-
+@Repository
+@SuppressWarnings("JpaQlInspection")
 public class AuthorRepositoryImpl implements AuthorRepository {
 
+    @PersistenceContext
     private EntityManager em;
 
     public AuthorRepositoryImpl(EntityManager em) {
@@ -16,37 +20,24 @@ public class AuthorRepositoryImpl implements AuthorRepository {
     }
 
     @Override
-    public List<AuthorEntity> findAll() {
-        return null;
-    }
-
-    @Override
-    public List<AuthorEntity> findByFirstName(String name) {
-        return null;
-    }
-
-    @Override
-    public List<AuthorEntity> findByLastName(String name) {
-        return null;
-    }
-
-    @Override
-    public AuthorEntity findByFirstNameAndLastName(String firstName, String lastName) {
-        return null;
+    public List<AuthorEntity> getAll() {
+        TypedQuery<AuthorEntity> query = em.createQuery("select a from AuthorEntity a", AuthorEntity.class);
+        return query.getResultList();
     }
 
     @Override
     public AuthorEntity getByAuthorId(long id) {
-        return null;
+        return em.find(AuthorEntity.class, id);
     }
 
     @Override
     public void deleteByAuthorId(long id) {
-
+        AuthorEntity authorEntity = em.find(AuthorEntity.class, id);
+        em.remove(authorEntity);
     }
 
     @Override
-    public void save(AuthorEntity authorEntity) {
+    public void insert(AuthorEntity authorEntity) {
         em.persist(authorEntity);
     }
 }

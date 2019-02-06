@@ -23,7 +23,7 @@ public class AuthorRepositoryTest {
 
     @Test
     public void findAllTest() {
-        assertThat(repository.findAll()).size().isEqualTo(7);
+        assertThat(repository.getAll()).size().isEqualTo(7);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class AuthorRepositoryTest {
 
     @Test
     public void saveTest() {
-        repository.save(new AuthorEntity("TEST", "TESTLAST"));
+        repository.insert(new AuthorEntity("TEST", "TESTLAST"));
         AuthorEntity entity = repository.getByAuthorId(1);
         assertThat(entity.getFirstName()).isEqualTo("JOSHUA");
         repository.deleteByAuthorId(1L); //so Count would stay the same for deleteByAuthorIdTest()
