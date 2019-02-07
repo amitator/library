@@ -27,27 +27,6 @@ public class AuthorRepositoryTest {
     }
 
     @Test
-    public void findByFirstNameTest() {
-        list = repository.findByFirstName("JOSHUA");
-        assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getFirstName()).isEqualTo("JOSHUA");
-    }
-
-    @Test
-    public void findByLastNameTest() {
-        list = repository.findByLastName("BLOCH");
-        assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getLastName()).isEqualTo("BLOCH");
-    }
-
-    @Test
-    public void findByFirstNameAndLastNameTest() {
-        entity = repository.findByFirstNameAndLastName("JOSHUA", "BLOCH");
-        assertThat(entity.getFirstName()).isEqualTo("JOSHUA");
-        assertThat(entity.getLastName()).isEqualTo("BLOCH");
-    }
-
-    @Test
     public void getByAuthorIdTest() {
         entity = repository.getByAuthorId(1);
         assertThat(entity.getAuthorId()).isEqualTo(1);

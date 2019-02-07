@@ -25,7 +25,7 @@ public class CommentRepositoryTest {
 
     @Test
     public void findAllByBookIdTest() {
-        assertThat(repository.findAllByBookId(1L)).size().isEqualTo(5);
+        assertThat(repository.getByBookId(1L)).size().isEqualTo(5);
     }
 
 }

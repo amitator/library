@@ -20,21 +20,7 @@ public class PublisherRepositoryTest {
 
     @Test
     public void findAll() {
-        assertThat(repository.findAll()).size().isEqualTo(4);
-    }
-
-    @Test
-    public void findByNameTest() throws Exception {
-        List<PublisherEntity> list = repository.findByName("MANNING");
-        assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getName()).isEqualTo("MANNING");
-    }
-
-    @Test
-    public void findByCountryTest() throws Exception {
-        List<PublisherEntity> list = repository.findByCountry("US");
-        assertThat(list.size()).isEqualTo(4);
-        assertThat(list.get(0).getName()).isEqualTo("OREILLY");
+        assertThat(repository.getAll()).size().isEqualTo(4);
     }
 
     @Test
