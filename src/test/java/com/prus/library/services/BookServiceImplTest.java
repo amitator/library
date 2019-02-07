@@ -43,10 +43,10 @@ public class BookServiceImplTest {
         BookEntity mockEntity = new BookEntity("NAME", 111111, 9999, "TYPE",
                 new PublisherEntity("PUBLISHER", "UN"),
                 new AuthorEntity("AUTHOR-FIRST-NAME", "AUTHOR-LAST-NAME"));
-        Mockito.when(mockRepo.findById(1)).thenReturn(mockEntity);
-        BookEntity test = mockRepo.findById(1L);
+        Mockito.when(mockRepo.getById(1)).thenReturn(mockEntity);
+        BookEntity test = mockRepo.getById(1L);
         assertEquals(mockEntity, test);
-        Mockito.verify(mockRepo).findById(1L);
+        Mockito.verify(mockRepo).getById(1L);
     }
 
     @Test

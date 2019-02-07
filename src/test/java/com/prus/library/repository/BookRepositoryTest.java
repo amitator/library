@@ -25,7 +25,7 @@ public class BookRepositoryTest {
 
     @Test
     public void findByIdTest() {
-        BookEntity entity = repository.findById(1);
+        BookEntity entity = repository.getById(1);
         assertThat(entity.getId()).isEqualTo(1);
         assertThat(entity.getName()).isEqualTo("EFFECTIVE JAVA");
     }
