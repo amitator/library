@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class CommentServiceImplTest {
+public class CommentServiceTest {
 
     @MockBean
     CommentRepository mockRepo;

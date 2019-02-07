@@ -1,7 +1,6 @@
 package com.prus.library.shell;
 
 import com.prus.library.entities.CommentEntity;
-import com.prus.library.services.CommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
