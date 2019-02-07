@@ -23,8 +23,12 @@ public class BookService{
         return repository.getAll();
     }
 
-    public List<BookEntity> getByAuthorId(long AuthorId) {
-        return repository.getByAuthorId(AuthorId);
+    public List<BookEntity> getByAuthorId(long authorId) {
+        return repository.getByAuthorId(authorId);
+    }
+
+    public List<BookEntity> getByPublisherId(long publisherId) {
+        return repository.getByPublisherId(publisherId);
     }
 
     public void deleteById(long id) {

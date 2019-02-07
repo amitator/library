@@ -24,11 +24,11 @@ public class AuthorService {
     }
 
 
-    void insert(AuthorEntity authorEntity) {
+    public void insert(AuthorEntity authorEntity) {
         repository.insert(authorEntity);
     }
 
-    void deleteByAuthorId(long id){
+    public void deleteByAuthorId(long id){
         repository.deleteByAuthorId(id);
     }
 

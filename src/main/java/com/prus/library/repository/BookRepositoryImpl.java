@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.awt.print.Book;
 import java.util.List;
 
 @SuppressWarnings("JpaQlInspection")
@@ -30,8 +29,21 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public List<BookEntity> getByAuthorId(long AuthorId) {
-        return null;
+    public List<BookEntity> getByAuthorId(long authorId) {
+        TypedQuery<BookEntity> query = em.createQuery("select b from BookEntity " +
+                "join b.author a " +
+                "where a.id = :authorId", BookEntity.class);
+        query.setParameter("authorId", authorId);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<BookEntity> getByPublisherId(long publisherId) {
+        TypedQuery<BookEntity> query = em.createQuery("select b from BookEntity " +
+                "join b.publisher p " +
+                "where p.id = :publisherId", BookEntity.class);
+        query.setParameter("publisherId", publisherId);
+        return query.getResultList();
     }
 
     @Override

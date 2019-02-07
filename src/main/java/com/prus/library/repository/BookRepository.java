@@ -11,7 +11,8 @@ import java.util.List;
 public interface BookRepository {
     BookEntity getById(long id);
     List<BookEntity> getAll();
-    List<BookEntity> getByAuthorId(long AuthorId);
+    List<BookEntity> getByAuthorId(long authorId);
+    List<BookEntity> getByPublisherId(long publisherId);
     void deleteById(long id);
     void insert(BookEntity bookEntity);
 }
