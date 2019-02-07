@@ -3,7 +3,6 @@ package com.prus.library.shell;
 import com.prus.library.entities.AuthorEntity;
 import com.prus.library.entities.BookEntity;
 import com.prus.library.entities.PublisherEntity;
-import com.prus.library.services.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

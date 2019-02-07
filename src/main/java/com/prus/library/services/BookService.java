@@ -1,19 +1,38 @@
 package com.prus.library.services;
 
-import com.prus.library.entities.AuthorEntity;
 import com.prus.library.entities.BookEntity;
+import com.prus.library.repository.BookRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface BookService {
-    List<BookEntity> findAll();
-    BookEntity findByName(String name);
-    BookEntity findById(long id);
-    List<BookEntity> findByYear(int year);
-    List<BookEntity> findByType(String type);
-    List<BookEntity> findByAuthorEntityAuthorId(Long id);
-    List<BookEntity> findByPublisherEntityPublisherId(Long id);
-    void save(BookEntity bookEntity);
-    void deleteById(long id);
+@Service
+public class BookService{
+
+    private BookRepository repository;
+
+    public BookService(BookRepository repository) {
+        this.repository = repository;
+    }
+
+    public BookEntity getById(long id) {
+        return repository.getById(id);
+    }
+
+    public List<BookEntity> getAll() {
+        return repository.getAll();
+    }
+
+    public List<BookEntity> getByAuthorId(long AuthorId) {
+        return repository.getByAuthorId(AuthorId);
+    }
+
+    public void deleteById(long id) {
+        repository.deleteById(id);
+    }
+
+    public void insert(BookEntity bookEntity) {
+        repository.insert(bookEntity);
+    }
 
 }
