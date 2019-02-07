@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PublisherRepository extends JpaRepository<PublisherEntity, Integer> {
-    List<PublisherEntity> findByName(String name);
-    List<PublisherEntity> findByCountry(String country);
+public interface PublisherRepository {
+    List<PublisherEntity> getAll();
     PublisherEntity findByPublisherId(long id);
     void deleteByPublisherId(long id);
+    void insert(PublisherEntity publisherEntity);
 }
