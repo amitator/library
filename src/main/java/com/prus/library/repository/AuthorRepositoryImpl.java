@@ -2,6 +2,7 @@ package com.prus.library.repository;
 
 import com.prus.library.entities.AuthorEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,6 +38,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
     }
 
     @Override
+    @Transactional
     public void insert(AuthorEntity authorEntity) {
         em.persist(authorEntity);
     }

@@ -1,29 +1,33 @@
 package com.prus.library.shell;
 
 import com.prus.library.entities.AuthorEntity;
+import com.prus.library.services.AuthorService;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @ShellComponent
 public class AuthorCommands {
 
-//    private AuthorRepository dao;
-
     private AuthorService service;
-
 
     public AuthorCommands(AuthorService authorService){
         this.service = authorService;
     }
+
+//    List<AuthorEntity> getAll();
+//    AuthorEntity getByAuthorId(long id);
+//    void insert(AuthorEntity authorEntity);
+//    void deleteByAuthorId(long id);
 
     @ShellMethod("Add author: FIRST_NAME LAST_NAME")
     public void addAuthor(String firstName, String lastName){
         AuthorEntity authorEntity = new AuthorEntity();
         authorEntity.setFirstName(firstName);
         authorEntity.setLastName(lastName);
-        service.save(authorEntity);
+        service.insert(authorEntity);
     }
 
     @ShellMethod("Get all authors")
