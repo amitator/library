@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class AuthorServiceImplTest {
+public class AuthorServiceTest {
 
     @MockBean
     AuthorRepository mockRepo;

@@ -1,7 +1,6 @@
 package com.prus.library.shell;
 
 import com.prus.library.entities.AuthorEntity;
-import com.prus.library.services.AuthorService;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
