@@ -5,9 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
+@SuppressWarnings("JpaQlInspection")
 public class CommentRepositoryImpl implements CommentRepository {
 
     @PersistenceContext
@@ -15,7 +17,8 @@ public class CommentRepositoryImpl implements CommentRepository {
 
     @Override
     public List<CommentEntity> getByBookId(Long id) {
-        return null;
+        TypedQuery query = em.createQuery("select c from CommentEntity c join c.book b where b.id = :book", CommentEntity.class);
+        return query.getResultList();
     }
 
     @Override

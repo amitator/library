@@ -10,7 +10,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-@SuppressWarnings("JpaQlInspection")
 public class AuthorRepositoryImpl implements AuthorRepository {
 
     @PersistenceContext
