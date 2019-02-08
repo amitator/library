@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -18,37 +19,22 @@ public class BookCommands {
 
     @ShellMethod("Get all books")
     public String getAllBooks(){
-        return service.findAll().stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
-    }
-
-    @ShellMethod("Get book by ID")
-    public String getBookByName(String name){
-        return service.findByName(name).toString();
+        return service.getAll().stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get book by ID")
     public String getBookById(long id){
-        return service.findById(id).toString();
-    }
-
-    @ShellMethod("Get books by YEAR")
-    public String getBookByYear(int year){
-        return service.findByYear(year).stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
-    }
-
-    @ShellMethod("Get books by TYPE")
-    public String getBookByType(String type){
-        return service.findByType(type).stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
+        return service.getById(id).toString();
     }
 
     @ShellMethod("Get books by PUBLISHER_ID")
     public String getBookByPublisherId(Long id){
-        return service.findByPublisherEntityPublisherId(id).stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
+        return service.getByPublisherId(id).stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Get books by AUTHOR_ID")
     public String getBookByAuthorId(Long id){
-        return service.findByAuthorEntityAuthorId(id).stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
+        return service.getByAuthorId(id).stream().map(BookEntity::toString).collect(Collectors.joining("\n"));
     }
 
     @ShellMethod("Add book: NAME ISBN YEAR TYPE AUTHOR-FIRST-NAME AUTHOR-LAST-NAME PUBLISHER COUNTRY")
@@ -58,7 +44,7 @@ public class BookCommands {
         BookEntity bookEntity = new BookEntity(name, isbn, year, type,
                 new PublisherEntity(publisher, country),
                 new AuthorEntity(authorFirstName, authorLastName));
-        service.save(bookEntity);
+        service.insert(bookEntity);
     }
 
     @ShellMethod("Delete book by ID")

@@ -5,6 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -13,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Import(AuthorRepositoryImpl.class)
 public class AuthorRepositoryTest {
 
     @Autowired
@@ -23,28 +28,7 @@ public class AuthorRepositoryTest {
 
     @Test
     public void findAllTest() {
-        assertThat(repository.findAll()).size().isEqualTo(7);
-    }
-
-    @Test
-    public void findByFirstNameTest() {
-        list = repository.findByFirstName("JOSHUA");
-        assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getFirstName()).isEqualTo("JOSHUA");
-    }
-
-    @Test
-    public void findByLastNameTest() {
-        list = repository.findByLastName("BLOCH");
-        assertThat(list.size()).isEqualTo(1);
-        assertThat(list.get(0).getLastName()).isEqualTo("BLOCH");
-    }
-
-    @Test
-    public void findByFirstNameAndLastNameTest() {
-        entity = repository.findByFirstNameAndLastName("JOSHUA", "BLOCH");
-        assertThat(entity.getFirstName()).isEqualTo("JOSHUA");
-        assertThat(entity.getLastName()).isEqualTo("BLOCH");
+        assertThat(repository.getAll()).size().isEqualTo(7);
     }
 
     @Test
@@ -55,10 +39,10 @@ public class AuthorRepositoryTest {
 
     @Test
     public void saveTest() {
-        repository.save(new AuthorEntity("TEST", "TESTLAST"));
+        repository.insert(new AuthorEntity("TEST", "TESTLAST"));
         AuthorEntity entity = repository.getByAuthorId(1);
         assertThat(entity.getFirstName()).isEqualTo("JOSHUA");
-        repository.deleteByAuthorId(1L); //so Count would stay the same for deleteByAuthorIdTest()
+        repository.deleteByAuthorId(1L);
     }
 
 }

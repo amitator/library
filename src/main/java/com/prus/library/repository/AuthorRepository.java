@@ -5,11 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AuthorRepository extends JpaRepository<AuthorEntity, Integer> {
-    List<AuthorEntity> findAll();
-    List<AuthorEntity> findByFirstName(String name);
-    List<AuthorEntity> findByLastName(String name);
-    AuthorEntity findByFirstNameAndLastName(String firstName, String lastName);
+public interface AuthorRepository {
+    List<AuthorEntity> getAll();
     AuthorEntity getByAuthorId(long id);
+    void insert(AuthorEntity authorEntity);
     void deleteByAuthorId(long id);
 }

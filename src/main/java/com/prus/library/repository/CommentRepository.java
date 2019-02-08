@@ -5,7 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
-    List<CommentEntity> findAllByBookId(Long id);
+public interface CommentRepository {
+    List<CommentEntity> getByBookId(Long id);
     void deleteById(Long id);
+    void insert(CommentEntity commentEntity);
 }

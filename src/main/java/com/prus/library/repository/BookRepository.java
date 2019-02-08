@@ -8,12 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 
-public interface BookRepository extends JpaRepository<BookEntity, Integer> {
-    BookEntity findById(long id);
-    BookEntity findByName(String name);
-    List<BookEntity> findByYear(int year);
-    List<BookEntity> findByType(String type);
-    List<BookEntity> findByAuthorEntityAuthorId(Long authorId);
-    List<BookEntity> findByPublisherEntityPublisherId(Long publisherId);
+public interface BookRepository {
+    BookEntity getById(long id);
+    List<BookEntity> getAll();
+    List<BookEntity> getByAuthorId(long authorId);
+    List<BookEntity> getByPublisherId(long publisherId);
     void deleteById(long id);
+    void insert(BookEntity bookEntity);
 }
